@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- Version: 2 - DO NOT CACHE -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地文档智能问答与创作工具</title>
+    <link rel="stylesheet" href="css/styles.css?v=7">
+</head>
+<body>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo"><span>📚</span><span>私有文档智能问答与辅助创作工具</span></div>
+        <div class="header-info">
+            <div>📁 <span id="header-files">0 文件</span></div>
+            <div>📝 <span id="header-chunks">0 片段</span></div>
+        </div>
+    </header>
+    <aside class="sidebar">
+        <div class="nav-section">
+            <div class="nav-section-title">核心功能</div>
+            <div class="nav-item active" data-tab="chat"><span class="nav-item-icon">💬</span><span>智能问答</span></div>
+            <div class="nav-item" data-tab="create"><span class="nav-item-icon">✍️</span><span>文档创作</span></div>
+            <div class="nav-item" data-tab="optimize"><span class="nav-item-icon">✨</span><span>文档优化</span></div>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">知识库管理</div>
+            <div class="nav-item" data-tab="documents"><span class="nav-item-icon">📂</span><span>文档管理</span></div>
+            <div class="nav-item" data-tab="memory"><span class="nav-item-icon">🧠</span><span>记忆管理</span></div>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="panel active" id="panel-chat">
+            <div class="page-header">
+                <h1 class="page-title">💬 智能问答</h1>
+                <p class="page-subtitle">基于本地文档库的智能问答，支持多轮对话和记忆加速</p>
+            </div>
+            <div class="card">
+                <div class="chat-container" id="chat-container">
+                    <div class="message message-assistant">
+                        <div class="message-bubble-assistant">您好！我是文档智能助手，可以基于您的本地文档库回答问题。请先在「文档管理」中同步文档。</div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <textarea class="text-input" id="question-input" placeholder="请输入您的问题..." rows="2" onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendQuestion();}"></textarea>
+                    <button class="btn btn-primary" onclick="sendQuestion()" id="send-btn">🚀 发送</button>
+                </div>
+                <div style="margin-top:16px;">
+                    <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-secondary);cursor:pointer;">
+                        <input type="checkbox" id="use-history" checked style="width:16px;height:16px;">启用对话历史
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel" id="panel-create">
+            <div class="page-header">
+                <h1 class="page-title">✍️ 文档创作</h1>
+                <p class="page-subtitle">基于文档库内容辅助创作各类文档</p>
+            </div>
+            <div class="two-columns">
+                <div class="card full-width">
+                    <div class="card-header">
+                        <div class="card-title"><span class="card-title-icon">📝</span><span>创作要求</span></div>
+                    </div>
+                    <div style="margin-bottom:16px;">
+                        <div class="input-group" style="width:100%;">
+                            <label for="creation-title">文档标题（可选）</label>
+                            <input type="text" class="text-input" id="creation-title" placeholder="输入文档标题" style="width:100%;box-sizing:border-box;">
+                        </div>
+                        <div class="input-group" style="width:100%;">
+                            <label for="creation-requirement">创作要求</label>
+                            <textarea class="text-input" id="creation-requirement" placeholder="请描述您希望生成的文档类型、结构、内容要求等（例如：生成一份关于网络安全的技术报告，包含引言、正文、总结等章节）..." rows="4" style="width:100%;box-sizing:border-box;"></textarea>
+                        </div>
+                        <button class="btn btn-primary" onclick="startCreationStream()" style="width:100%;">✨ 开始创作</button>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <div class="card-header">
+                        <div class="card-title"><span class="card-title-icon">📄</span><span>创作结果</span></div>
+                        <div style="display:flex;gap:8px;">
+                            <button class="btn btn-secondary btn-sm" onclick="copyResult()" id="copy-btn">📋 复制</button>
+                        <button class="btn btn-secondary btn-sm" onclick="exportCreationToDocx()" id="export-docx-btn" disabled>📄 导出 DOCX</button>
+                        </div>
+                    </div>
+                    <div class="creation-result" id="creation-result">
+                        <div style="color:var(--text-secondary);text-align:center;padding:40px;">请在左侧填写创作要求后点击「开始创作」</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel" id="panel-documents">
+            <div class="page-header">
+                <h1 class="page-title">📂 文档管理</h1>
+                <p class="page-subtitle">管理知识库中的文档，支持同步、查看和清空</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card primary"><div class="stat-value" id="stat-files">0</div><div class="stat-label">已索引文件</div></div>
+                <div class="stat-card success"><div class="stat-value" id="stat-chunks">0</div><div class="stat-label">知识片段</div></div>
+                <div class="stat-card warning"><div class="stat-value" id="stat-memory">0</div><div class="stat-label">记忆条目</div></div>
+                <div class="stat-card"><div class="stat-value" id="stat-status">✓</div><div class="stat-label">系统状态</div></div>
+            </div>
+            <div class="two-columns">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><span class="card-title-icon">🔄</span><span>同步文档</span></div>
+                    </div>
+                    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">指定文档目录，扫描该目录下所有 PDF、Word、TXT 文件构建知识库。</p>
+                    <div class="input-group">
+                        <label for="doc-dir-input">文档目录路径</label>
+                        <div class="input-row">
+                            <input type="text" id="doc-dir-input" class="text-input" placeholder="请输入文档目录路径" value="data/documents">
+                            <button class="btn btn-secondary" onclick="browseFolder()">📁 浏览</button>
+                        </div>
+                        <p class="input-hint">💡 提示：如果目录不存在将自动创建</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="syncDocuments()" id="sync-btn" style="width:100%;">🔄 同步文档</button>
+                    <div class="loading" id="sync-loading"><div class="spinner"></div><span>正在解析文档，请稍候...</span></div>
+                    <div id="sync-result" style="margin-top:16px;padding:12px;background:var(--bg);border-radius:8px;display:none;"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><span class="card-title-icon">📚</span><span>已导入知识库文档</span></div>
+                        <button class="btn btn-danger btn-sm" onclick="clearKB()">🗑️ 清空</button>
+                    </div>
+                    <div class="doc-list" id="doc-list">
+                        <div style="padding:24px;text-align:center;color:var(--text-secondary);font-size:14px;">暂无文档，请先同步</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel" id="panel-memory">
+            <div class="page-header">
+                <h1 class="page-title">🧠 记忆管理</h1>
+                <p class="page-subtitle">管理对话记忆系统，包括短期记忆和长期记忆</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><span class="card-title-icon">📊</span><span>记忆统计</span></div>
+                    <button class="btn btn-secondary btn-sm" onclick="refreshMemoryStats()">🔄 刷新</button>
+                </div>
+                <div class="memory-stats">
+                    <div class="memory-stat"><div class="memory-stat-value" id="mem-short-size">0</div><div class="memory-stat-label">短期记忆条目</div></div>
+                    <div class="memory-stat"><div class="memory-stat-value" id="mem-short-hits">0</div><div class="memory-stat-label">短期记忆命中</div></div>
+                    <div class="memory-stat"><div class="memory-stat-value" id="mem-long-entries">0</div><div class="memory-stat-label">长期记忆条目</div></div>
+                    <div class="memory-stat"><div class="memory-stat-value" id="mem-long-keywords">0</div><div class="memory-stat-label">关键词数量</div></div>
+                </div>
+            </div>
+            <div class="card" style="margin-top:20px;">
+                <div class="card-header"><div class="card-title"><span class="card-title-icon">⚙️</span><span>记忆操作</span></div></div>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                    <button class="btn btn-secondary" onclick="clearMemory('short')">🗑️ 清空短期记忆</button>
+                    <button class="btn btn-secondary" onclick="clearMemory('long')">🗑️ 清空长期记忆</button>
+                    <button class="btn btn-danger" onclick="clearMemory('all')">🗑️ 清空全部记忆</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 文档优化面板 -->
+        <div class="panel" id="panel-optimize">
+            <div class="page-header">
+                <h1 class="page-title">✨ 文档优化</h1>
+                <p class="page-subtitle">上传文档并进行扩写、缩写、改写、结构化整理</p>
+            </div>
+            <div class="two-columns">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><span class="card-title-icon">📤</span><span>上传文档</span></div>
+                    </div>
+                    <div style="border:2px dashed var(--border);border-radius:12px;padding:32px;text-align:center;margin-bottom:16px;" id="drop-zone" ondragover="event.preventDefault()" ondrop="handleDrop(event)">
+                        <div style="font-size:48px;margin-bottom:16px;">📄</div>
+                        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">拖拽文件到此处，或点击选择文件</div>
+                        <div style="font-size:12px;color:var(--text-light);">支持 PDF、Word、TXT 格式</div>
+                        <input type="file" id="file-input" accept=".pdf,.doc,.docx,.txt" style="display:none;" onchange="handleFileSelect(event)">
+                        <button class="btn btn-secondary" onclick="document.getElementById('file-input').click()" style="margin-top:16px;">📁 选择文件</button>
+                    </div>
+                    <div id="file-info" style="display:none;padding:12px;background:var(--bg);border-radius:8px;margin-bottom:16px;">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <span style="font-size:24px;">📄</span>
+                            <div style="flex:1;">
+                                <div style="font-weight:600;" id="file-name">filename.pdf</div>
+                                <div style="font-size:12px;color:var(--text-secondary);" id="file-size">0 KB</div>
+                            </div>
+                            <button class="btn btn-danger btn-sm" onclick="clearFile()">🗑️</button>
+                        </div>
+                    </div>
+                    <div class="input-group" style="width:100%;">
+                        <label for="optimize-instruction">修改要求</label>
+                        <textarea class="text-input" id="optimize-instruction" placeholder="请输入您的修改要求，例如：&#10;- 请对文档内容进行扩写，添加更多细节和案例&#10;- 请总结文档的核心要点，控制在 300 字以内&#10;- 请优化文档的表达方式，使语言更通俗易懂&#10;- 请整理文档结构，添加标题层级和列表&#10;- 保持专业术语，修正格式错误" rows="5" style="width:100%;box-sizing:border-box;"></textarea>
+                        <p style="font-size:12px;color:var(--text-light);margin-top:8px;">💡 提示：描述越详细，优化效果越好</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="startOptimize()" id="optimize-btn" style="width:100%;">✨ 开始优化</button>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><span class="card-title-icon">📄</span><span>优化结果</span></div>
+                        <div style="display:flex;gap:8px;">
+                            <button class="btn btn-secondary btn-sm" onclick="copyOptimizeResult()" id="copy-opt-btn" disabled>📋 复制</button>
+                            <button class="btn btn-secondary btn-sm" onclick="exportOptimizeToDocx()" id="export-opt-docx-btn" disabled>📄 导出 DOCX</button>
+                        </div>
+                    </div>
+                    <div class="creation-result" id="optimize-result">
+                        <div style="color:var(--text-secondary);text-align:center;padding:40px;">请上传文档并选择优化类型后点击「开始优化」</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="toast-container" id="toast-container"></div>
+
+    <div class="toast-container" id="toast-container"></div>
+    
+    <script src="js/app.js?v=20260711-2"></script>
+</body>
+</html>

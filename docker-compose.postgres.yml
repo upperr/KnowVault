@@ -1,0 +1,41 @@
+version: '3.8'
+
+# PostgreSQL + pgvector 快速启动配置
+# 用于 RAG 知识库向量存储
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: postgres-pgvector
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: rag_knowledge
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
+
+# 使用说明:
+# 1. 启动：docker-compose up -d
+# 2. 查看日志：docker-compose logs -f
+# 3. 停止：docker-compose down
+# 4. 重置数据：docker-compose down -v
+#
+# 环境变量配置:
+# export POSTGRES_HOST=localhost
+# export POSTGRES_PORT=5432
+# export POSTGRES_DB=rag_knowledge
+# export POSTGRES_USER=postgres
+# export POSTGRES_PASSWORD=postgres
+# export VECTOR_DIMENSION=1024

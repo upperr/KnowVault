@@ -1,0 +1,854 @@
+{
+  "单选": {
+    "correct": 37,
+    "total": 47,
+    "details": [
+      {
+        "question": "杆塔的作用为（  ）。A. 支持导线及杆上设备 | B. 支持横担 | C. 支持绝缘子 | D. 支持金具",
+        "standard_answer": "A",
+        "model_answer": "根据文档内容，杆塔的作用是支持导线及杆上设备。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "绝缘子的作用为（  ）。A. 固定导线并使导线对杆塔绝缘 | B. 连接横担 | C. 支持横担 | D. 固定导线",
+        "standard_answer": "A",
+        "model_answer": "A\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "设备缺陷划分为一般缺陷、（  ）和危急缺陷三个等级。A. 较大缺陷 | B. 轻微缺陷 | C. 严重缺陷 | D. 紧急缺陷",
+        "standard_answer": "C",
+        "model_answer": "C. 严重缺陷\n\n【参考来源】\n- 《变电运维.pdf》\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "水泥杆（混凝土电杆）的优点是（  ）。A. 防碰撞 | B. 重量大 | C. 便于运输 | D. 价优且使用周期长",
+        "standard_answer": "D",
+        "model_answer": "根据提供的文档内容，没有直接提到水泥杆（混凝土电杆）的优点。因此，无法从给定的文档片段中确定正确答案。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "市区公网及专线的定期巡视周期为（  ）。A. 每周一次 | B. 每月一次 | C. 每季度一次 | D. 每半年一次",
+        "standard_answer": "B",
+        "model_answer": "B. 每月一次\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "巡视时对带电设备（10kV）应保持的安全距离不小于（  ）。A. 0.3米 | B. 0.7米 | C. 1.0米 | D. 1.5米",
+        "standard_answer": "B",
+        "model_answer": "B\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "危急缺陷发现后要求在（  ）内处理完毕。A. 12小时 | B. 24小时 | C. 7个工作日 | D. 1个月",
+        "standard_answer": "B",
+        "model_answer": "B\n\n【参考来源】\n- 《配网运检.pdf》\n- 《变电运维.pdf》",
+        "correct": true
+      },
+      {
+        "question": "夜间巡视的主要目的是发现（  ）。A. 杆塔倾斜 | B. 导线断股 | C. 接头接点发热打火 | D. 通道树木侵限",
+        "standard_answer": "C",
+        "model_answer": "C\n\n【参考来源】\n- 《变电运维.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配网运检班组核心安全制度是（  ）。A. 三级验收制度 | B. 工器具管理制 | C. 缺陷管理制度 | D. 两票三制",
+        "standard_answer": "D",
+        "model_answer": "D\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电线路工程执行的验收制度为（  ）。A. 一级验收 | B. 二级验收 | C. 三级验收 | D. 四级验收",
+        "standard_answer": "C",
+        "model_answer": "根据提供的文档内容，没有提及配电线路工程执行的具体验收制度。因此，无法从文档中确定正确答案。\n\n【参考来源】\n- 《配网运检.pdf》\n- 《变电检修.pdf》",
+        "correct": false
+      },
+      {
+        "question": "用于检测线路或设备是否带电、确认停电范围的工器具是（  ）。A. 万用表 | B. 验电器 | C. 红外测温仪 | D. 兆欧表",
+        "standard_answer": "B",
+        "model_answer": "B. 验电器\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "高压设备区域防止跨步电压伤害需使用的防护工器具是（  ）。A. 绝缘靴（绝缘鞋） | B. 安全帽 | C. 接地线 | D. 绝缘手套",
+        "standard_answer": "A",
+        "model_answer": "A\n\n【参考来源】\n- 《变电运维.pdf》",
+        "correct": true
+      },
+      {
+        "question": "不停电测量线路电流、判断负荷是否超过的工器具是（  ）。A. 钳形电流表 | B. 验电笔 | C. 兆欧表 | D. 万用表",
+        "standard_answer": "A",
+        "model_answer": "A\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电线路抢修时，装设接地线过程中严禁（  ）。A. 验电 | B. 人身触及接地线 | C. 悬挂警示牌 | D. 使用绝缘工具",
+        "standard_answer": "B",
+        "model_answer": "B\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电线路检修的组织措施不包括（  ）。A. 现场勘察制度 | B. 工作票制度 | C. 停电 | D. 工作监护制度",
+        "standard_answer": "C",
+        "model_answer": "C\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电自动化的核心优势是：A降低建设成本 | B大幅缩短停电时间 | C减少设备数量 | D简化运维流程",
+        "standard_answer": "B",
+        "model_answer": "B\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "终端监测设备上报故障信息的时间约为：A一秒内 | B5秒内 | C10秒内 | D30秒内",
+        "standard_answer": "A",
+        "model_answer": "根据提供的文档内容，没有直接提到终端监测设备上报故障信息的具体时间。因此，无法从文档中确定正确答案。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电自动化系统核心组成部分不包括：A主站 | B子站 | C配电自动化终端 | D高压发电机",
+        "standard_answer": "D",
+        "model_answer": "D\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "生产控制大区的核心目标是：A安全可靠稳定运行 | B全景感知与智能管控 | C移动端业务应用 | D数据共享交换",
+        "standard_answer": "A",
+        "model_answer": "A\n\n【参考来源】\n- 《数字化建运专业协同.docx》",
+        "correct": true
+      },
+      {
+        "question": "配电终端采集的数据通过（）上传至主站系统：A感知层 | B网络层 | C平台层 | D应用层",
+        "standard_answer": "B",
+        "model_answer": "B网络层\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "安装在配电网架空线路柱上开关处的配电终端是：A DTU | B FTU | C TTU | D CTU",
+        "standard_answer": "B",
+        "model_answer": "B FTU\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "安装在配电网开关站、环网柜处的配电终端是：A DTU | B FTU | C TTU | D CTU",
+        "standard_answer": "A",
+        "model_answer": "A DTU\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "站所终端DTU“二遥标准型”的功能不包括：A遥测 | B遥信 | C就地故障自动隔离 | D故障信息上传",
+        "standard_answer": "C",
+        "model_answer": "C\n\n【参考来源】\n- 《配网运检.pdf》\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "DTU交流供电电源的标称电压为：A 110/120V | B 220V | C 380V | D 10kV",
+        "standard_answer": "B",
+        "model_answer": "B  \n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电自动化通信方式按介质分为：A有线和无线 | B光纤和载波 | C公网和专网 | D以太网和PON",
+        "standard_answer": "A",
+        "model_answer": "A\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电自动化最基本的应用是通过（）与终端配合实现：A故障仿真 | B三遥功能 | C新能源接入 | D负荷预测",
+        "standard_answer": "B",
+        "model_answer": "B\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "SCADA的全称是：A数据采集与监控系统 | B馈线自动化系统 | C配电网仿真系统 | D通信网关系统",
+        "standard_answer": "A",
+        "model_answer": "A\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "馈线自动化的核心作用是：A数据采集 | B故障定位、隔离和恢复供电 | C新能源监控 | D负荷转供",
+        "standard_answer": "B",
+        "model_answer": "B\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "最常见的就地重合式馈线自动化是：A电压时间型 | B电压电流时间型 | C自适应综合型 | D主动型",
+        "standard_answer": "A",
+        "model_answer": "A\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "国内引进配电自动化并开展试点的阶段：A上世纪50~70年代 | B 20世纪90年代到2008年 | C 2009~2019年 | D 2020年至今",
+        "standard_answer": "B",
+        "model_answer": "根据提供的文档内容，没有提及国内引进配电自动化并开展试点的具体阶段。因此，无法从给定的文档中确定正确答案。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "2012—2020年间全国配电自动化覆盖率超过：A 60% | B 70% | C 80% | D 90%",
+        "standard_answer": "C",
+        "model_answer": "根据提供的文档内容，没有提及2012—2020年间全国配电自动化覆盖率的具体数据，因此无法确定正确答案。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电自动化系统与相关应用系统信息集成的基础是：A一次网架和设备 | B配电终端 | C通信网络 | D主站系统",
+        "standard_answer": "A",
+        "model_answer": "根据文档内容，配电自动化系统与相关应用系统信息集成的基础是通信网络。文档中提到“配电终端数据通过网络层上传主站”，这表明通信网络在配电自动化系统中起到关键作用，是信息集成的基础。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "电网自动化领域重要的国际标准是：A IEC 61970/61968 | B GB/T | C 电力行业标准 | D 企业标准",
+        "standard_answer": "A",
+        "model_answer": "A\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "智能电网的核心特征不包括：A信息化 | B自动化 | C互动化 | D人工化",
+        "standard_answer": "D",
+        "model_answer": "D",
+        "correct": true
+      },
+      {
+        "question": "配电自动化是实现（）的重要基础之一：A传统电网 | B智能电网 | C高压电网 | D直流电网",
+        "standard_answer": "B",
+        "model_answer": "B\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "建设坚强灵活配电网（  ）结构，实现源荷高效承载。A．设备 | B．装备 | C．通信 | D．网架",
+        "standard_answer": "D",
+        "model_answer": "D．网架\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "在（  ）的基础上，推动配电网在形态和功能上进行转变。A．降低供电成本 | B．增强保供能力 | C．扩大供电范围 | D．提高设备质量",
+        "standard_answer": "B",
+        "model_answer": "D．提高设备质量\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "变压器在电力系统中最核心的作用是（ ）？A：限制短路电流 | B：变换电压等级 | C：补偿无功功率 | D：隔离故障点",
+        "standard_answer": "B",
+        "model_answer": "B\n\n【参考来源】\n- 《变电运维.pdf》\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "电流互感器二次侧的额定电流通常为（ ）？A：1A或5A | B：0A或20A | C：0.5A或1A | D：100A",
+        "standard_answer": "A",
+        "model_answer": "A",
+        "correct": true
+      },
+      {
+        "question": "油浸正立式电流互感器的结构特点是（ ）？A：二次绕组在下部 | B：二次绕组在上部 | C：铁芯在顶部 | D：无铁芯结构",
+        "standard_answer": "A",
+        "model_answer": "根据文档内容，电流互感器的基本结构包括一次绕组、二次绕组、铁芯及外壳/绝缘件。对于油浸正立式电流互感器，其结构特点中二次绕组通常位于上部。\n\n因此，正确答案是：  \nB：二次绕组在上部\n\n【参考来源】  \n- 《变电检修.pdf》",
+        "correct": false
+      },
+      {
+        "question": "电容器的核心作用是（ ）？A：提供容性无功功率 | B：切断故障电流 | C：变换电压等级 | D：隔离带电部分",
+        "standard_answer": "A",
+        "model_answer": "A：提供容性无功功率\n\n【参考来源】\n- 《变电运维.pdf》",
+        "correct": true
+      },
+      {
+        "question": "变电设备检修时若需停电操作，正确的操作顺序应为断路器、（ ）、电源侧隔离开关？A：避雷器 | B：负荷开关 | C：负荷侧隔离开关 | D：熔断器",
+        "standard_answer": "C",
+        "model_answer": "C：负荷侧隔离开关\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "D类检修适用于设备运行的（ ）？A：日常监控和维护 | B：整体更换 | C：部分解体 | D：关键部件试验",
+        "standard_answer": "A",
+        "model_answer": "A\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "（ ）是指运维人员确认现场安全措施到位、设备状态符合作业要求后，方可许可工作负责人开工，杜绝违章开工风险？A：工作监护制度 | B：工作许可制度 | C：工作转移制度 | D：工作间断制度",
+        "standard_answer": "B",
+        "model_answer": "B：工作许可制度\n\n【参考来源】\n- 《变电检修.pdf》\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "出厂试验的主要目的是（ ）？A：评估设备运行状态 | B：验证运输安装质量 | C：筛查制造一致性 | D：诊断设备故障类型",
+        "standard_answer": "C",
+        "model_answer": "根据提供的文档内容，没有直接提到“出厂试验”的具体目的。因此，无法从文档中得出答案。\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": false
+      },
+      {
+        "question": "断路器机械特性试验主要用于测量（ ）？A：绝缘电阻 | B：分合闸时间 | C：直流电阻 | D：局部放电",
+        "standard_answer": "B",
+        "model_answer": "B：分合闸时间\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "下列（ ）属于在线监测的优势？A：无需设备投资 | B：可连续监测 | C：测试精度低 | D：只能用于停电设备",
+        "standard_answer": "B",
+        "model_answer": "B：可连续监测\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      }
+    ]
+  },
+  "多选": {
+    "correct": 6,
+    "total": 33,
+    "details": [
+      {
+        "question": "架空配电线路的导电部分，导线按材料与结构可分为（  ）。A. 铝绞线 | B. 铝合金绞线 | C. 钢芯铝绞线 | D. 绝缘线",
+        "standard_answer": "ABCD",
+        "model_answer": "ABCD\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "架空配电线路的配电设备包含（  ）。A. 柱上开关（断路器/隔离开关） | B. 台架式变压器 | C. 跌落式熔断器 | D. 避雷器",
+        "standard_answer": "ABCD",
+        "model_answer": "A. 柱上开关（断路器/隔离开关）  \nB. 台架式变压器  \nC. 跌落式熔断器  \nD. 避雷器  \n\n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电网设备缺陷按严重程度可分为（  ）。A. 危急缺陷 | B. 严重缺陷 | C. 一般缺陷 | D. 轻微缺陷",
+        "standard_answer": "ABC",
+        "model_answer": "ABD\n\n【参考来源】\n- 《变电运维.pdf》\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "以下属于配电网设备缺陷分类涵盖的核心设备类别有（  ）。A. 架空线路、柱上开关 | B. 变压器、电缆线路 | C. 高压输电线路及变电站设备 | D. 开关柜、自动化终端",
+        "standard_answer": "ABD",
+        "model_answer": "根据文档内容，配电网设备缺陷分类涵盖的核心设备类别包括架空线路、柱上开关、变压器、电缆线路、开关柜和自动化终端。因此，正确选项是：\n\nABD\n\n【参考来源】\n- 《配网运检.pdf》\n- 《变电检修.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电线路检修的主要类型有（  ）。A. 计划检修 | B. 非计划检修 | C. 技术改造 | D. 故障性巡视",
+        "standard_answer": "ABC",
+        "model_answer": "A|B|C\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "保证配电线路检修工作安全的技术措施包括（  ）。A. 停电 | B. 验电 | C. 接地（含个人保安线） | D. 悬挂标识牌和装设围栏",
+        "standard_answer": "ABCD",
+        "model_answer": "ABCD\n\n【参考来源】\n- 《配网运检.pdf》\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电专业常用工器具按功能可分为（  ）。A. 安全防护类 | B. 登高作业类 | C. 测量检测类 | D. 检修操作类",
+        "standard_answer": "ABCD",
+        "model_answer": "根据提供的文档内容，没有直接提到配电专业常用工器具按功能的分类。因此，无法从文档中确定正确的选项。\n\n【参考来源】\n- 《变电检修.pdf》\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "三级验收制度包含的验收环节有（  ）。A. 自验 | B. 互验 | C. 专责验 | D. 第三方验收",
+        "standard_answer": "ABC",
+        "model_answer": "根据提供的文档内容，没有直接提到“三级验收制度”及其包含的验收环节。因此，无法从文档中确定正确答案。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "安全防护类工器具主要包括（  ）。A. 绝缘手套、绝缘鞋 | B. 安全帽 | C. 验电器、接地线 | D. 脚扣、绝缘梯",
+        "standard_answer": "ABC",
+        "model_answer": "安全防护类工器具主要包括绝缘手套、绝缘鞋、安全帽、验电器、接地线、脚扣、绝缘梯。根据文档内容，以下选项符合描述：\n\nA. 绝缘手套、绝缘鞋 —— 文档中提到在特定情况下需要使用绝缘靴和绝缘手套（如高压设备接地时）。\nB. 安全帽 —— 文档中提到开展变电站巡视时需要正确穿戴安全帽。\nC. 验电器、接地线 —— 文档中虽然没有直接提到“验电器”和“接地线”，但根据变电运维常识，这些属于安全防护类工器",
+        "correct": false
+      },
+      {
+        "question": "架空配电线路的巡视种类包括（ ）。A. 定期性巡视 | B. 特殊性巡视 | C. 夜间巡视 | D. 故障性巡视",
+        "standard_answer": "ABCD",
+        "model_answer": "A. 定期性巡视  \nB. 特殊性巡视  \nC. 夜间巡视  \nD. 故障性巡视  \n\n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "传统配电网管理的痛点有：A故障排查依赖人工、恢复供电慢 | B用电高峰易过载、需人工调整 | C隐患发现靠定期巡检 | D电力分配效率高",
+        "standard_answer": "ABC",
+        "model_answer": "A\nB\nC\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电自动化的实用功能：A用电高峰自动分流电力 | B隐患提前预警处理 | C支持新能源接入 | D远程故障隔离与恢复供电",
+        "standard_answer": "ABCD",
+        "model_answer": "根据文档内容，配电自动化的实用功能包括：\n\n- **D远程故障隔离与恢复供电**：文档中提到配电自动化核心优势是大幅缩短停电时间，并且馈线自动化（FA）的核心作用是故障定位、隔离、恢复供电。此外，DTU 二遥动作型可实现就地故障自动隔离。\n\n- **B隐患提前预警处理**：文档中提到传统配电网痛点之一是隐患发现靠定期巡检，而配电自动化系统可以提升对隐患的发现能力，从而实现隐患的提前预警处理。\n\n因",
+        "correct": false
+      },
+      {
+        "question": "配电自动化的重要意义：A提高供电可靠性和质量 | B扩大供电能力 | C实现配电网高效经济运行 | D为智能电网奠定基础",
+        "standard_answer": "ABCD",
+        "model_answer": "配电自动化的重要意义包括：A提高供电可靠性和质量、C实现配电网高效经济运行、D为智能电网奠定基础。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电自动化系统“三区”：A生产控制大区 | B管理信息大区 | C互联网大区 | D数据交换大区",
+        "standard_answer": "ABC",
+        "model_answer": "配电自动化系统“三区”包括：A生产控制大区 | B管理信息大区 | C互联网大区。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电自动化系统“四层”：A感知层 | B网络层 | C平台层 | D应用层",
+        "standard_answer": "ABCD",
+        "model_answer": "ABCD\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电主站的基本功能：A数据采集、状态监视 | B远方控制、图形显示 | C馈线故障处理 | D新能源接入模拟仿真",
+        "standard_answer": "ABC",
+        "model_answer": "根据提供的文档内容，配电主站的基本功能包括数据采集、状态监视和远方控制、图形显示。文档片段1中提到“配电自动化最基本应用：SCADA+ 终端实现三遥（遥测、遥信、遥控）”，而SCADA的全称是“数据采集与监控系统”，这表明数据采集和状态监视是其基本功能。此外，“远方控制、图形显示”也是SCADA系统的典型功能。\n\n文档片段中未提及“馈线故障处理”和“新能源接入模拟仿真”作为配电主站的基本功能。\n\n",
+        "correct": false
+      },
+      {
+        "question": "站所终端DTU按功能分为：A三遥终端 | B二遥标准型 | C二遥动作型 | D二遥基本型",
+        "standard_answer": "ABC",
+        "model_answer": "根据文档内容，站所终端DTU按功能分为：B二遥标准型、C二遥动作型。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电自动化有线通信方式：A无源光网络 | B工业以太网 | C电力线载波通信 | D无线公网",
+        "standard_answer": "ABC",
+        "model_answer": "根据文档内容，配电自动化有线通信方式包括：EPON、工业以太网、电力线载波。因此，正确选项为：\n\nABD\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "无线通信按网络性质分为：A无线公网 | B无线专网 | C电力线载波 | D EPON",
+        "standard_answer": "AB",
+        "model_answer": "A  \nB  \n\n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "SCADA系统的主要功能：A数据采集与监控 | B数据处理与存储 | C远程遥控开关操作 | D故障仿真模拟",
+        "standard_answer": "ABC",
+        "model_answer": "A  \n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "馈线自动化按信息处理方式分为：A主站集中 | B就地重合 | C智能分布 | D手动操作",
+        "standard_answer": "ABC",
+        "model_answer": "ABD\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "就地重合式馈线自动化包括：A电压时间型 | B电压电流时间型 | C自适应综合型 | D速冻型",
+        "standard_answer": "ABC",
+        "model_answer": "就地重合式馈线自动化包括：A电压时间型、B电压电流时间型、C自适应综合型。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电自动化系统建设原则：A因地制宜 | B分阶段建设 | C统一标准 | D盲目推广",
+        "standard_answer": "ABC",
+        "model_answer": "根据提供的文档内容，没有直接提到配电自动化系统建设的具体原则，如“因地制宜”、“分阶段建设”、“统一标准”或“盲目推广”。因此，无法从文档中确定正确的选项。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "智能电网对配电自动化的升级要求：A能量流和信息流双向互动 | B业务流程双向服务 | C互动优化 | D单一化数据采集",
+        "standard_answer": "ABC",
+        "model_answer": "A  \n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电运检班的运维职责：A 10kV配电线路及二次设备巡视 | B缺陷处理、故障抢修 | C设备更换维修 | D优质服务",
+        "standard_answer": "ABCD",
+        "model_answer": "A  \n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电网在功能上从单一供配电服务主体向（  ）资源高效配置平台转变。A．源 | B．网 | C．荷 | D．储",
+        "standard_answer": "ABCD",
+        "model_answer": "根据提供的文档内容，没有直接提到配电网在功能上从单一供配电服务主体向什么资源高效配置平台转变的信息。因此，无法从文档中得出答案。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电网是从电源侧（输电网、发电设施、分布式电源等）接受电能，通过配电设施（  ）或（  ）给各类用户的电力网。A．集中分配 | B．就地分配 | C．逐级分配 | D．按需分配",
+        "standard_answer": "BC",
+        "model_answer": "多选题答案：BC\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "围绕建设新型能源体系和新型电力系统的总目标，打造（  ）的新型配电系统。A．安全高效 | B．清洁低碳 | C．柔性灵活 | D．智慧融合",
+        "standard_answer": "ABCD",
+        "model_answer": "多选题正确选项为：ABCD\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "电流互感器按二次绕组安装位置的分类（ ）？A：贯穿式电流互感器 | B：支柱式电流互感器 | C：正立式电流互感器 | D：倒立式电流互感器",
+        "standard_answer": "CD",
+        "model_answer": "根据文档内容，电流互感器按二次绕组安装位置的分类并未直接提及。文档中提到的分类是按结构安装方式分类，包括正立式电流互感器和倒立式电流互感器，但这并不是按二次绕组安装位置的分类。\n\n因此，无法从提供的文档中确定正确答案。\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": false
+      },
+      {
+        "question": "GW4型隔离开关检修现场的危险点包括（ ）？A：头部磕碰 | B：机械夹手 | C：绊倒磕伤 | D：工具伤人",
+        "standard_answer": "ABCD",
+        "model_answer": "ABCD\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "现场实施阶段的“班前会”，会重点交待（ABC）来保障作业安全？A：任务分工 | B：安全措施 | C：危险点 | D：工作时长",
+        "standard_answer": "ABC",
+        "model_answer": "根据文档内容，现场实施阶段的“班前会”会重点交待任务分工、安全措施和危险点来保障作业安全。\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": false
+      },
+      {
+        "question": "下列（ ）属于绝缘缺陷？A：绝缘油受潮 | B：断路器卡涩 | C：套管裂纹 | D：绝缘纸老化",
+        "standard_answer": "AD",
+        "model_answer": "根据文档内容，绝缘缺陷包括：\n\n- 绝缘油整体受潮（对应选项 A）\n- 电流互感器的纸绝缘介质普遍老化（对应选项 D）\n- 户外瓷套或绝缘子表面积累了均匀的导电性污秽（属于整体性缺陷，也属于绝缘缺陷）\n- 变压器绕组内部因工艺不良或机械损伤产生的局部放电点（对应选项 C）\n- 电力电缆接头处因制作不当留下的微小气隙（属于集中性缺陷，也属于绝缘缺陷）\n- 绝缘子内部隐藏的裂纹（属于集中性缺陷，也属于",
+        "correct": false
+      },
+      {
+        "question": "变电设备检测设备状态可分为（ ）？A：停电试验 | B：带电检测 | C：在线监测 | B：例行试验",
+        "standard_answer": "ABC",
+        "model_answer": "ABCD\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": false
+      }
+    ]
+  },
+  "判断": {
+    "correct": 49,
+    "total": 49,
+    "details": [
+      {
+        "question": "一般缺陷是指设备本身及周围环境出现不正常情况，一般不威胁设备的安全运行，可列入年、季检修计划或日常维护工作中处理的缺陷。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "巡视线路及其设备是管理工作的重要环节和内容，是保证线路安全运行的最基本工作。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "巡视杆塔时，要观察杆塔是否有倾斜、位移。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "对于杆上开关，在巡视过程中应注意检查金具接线柱处有无氧化现象，若发现应及时进行处理。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《变电运维.pdf》\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电线路抢修时，放松导线可采用突然剪断导线的方法。",
+        "standard_answer": "错误",
+        "model_answer": "错误。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "自验收过程中发现的问题，若无法解决可直接留待处理，无需汇总（汇报）。",
+        "standard_answer": "错误",
+        "model_answer": "知识库中未找到与您问题直接相关的文档内容。",
+        "correct": true
+      },
+      {
+        "question": "兆欧表主要用于测量绝缘电阻，检测设备绝缘性能。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配网运检坚持实行7×24小时值班制度，以应对突发故障。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "定期检修是基于设备状态监测，根据健康状态安排检修，更具针对性。",
+        "standard_answer": "错误",
+        "model_answer": "正确\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "电缆中间接头发热烧毁的主要原因之一是制作工艺不良，接触电阻过大。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "登高作业时，杆上使用的材料、工具可直接抛掷至地面。",
+        "standard_answer": "错误",
+        "model_answer": "错误。\n\n【参考来源】\n- 《变电运维.pdf》",
+        "correct": true
+      },
+      {
+        "question": "专责验收人员在验收前应熟悉工程设计书，制定针对性验收方案。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "郊区及农村的架空配电线路定期巡视周期为每月至少一次。",
+        "standard_answer": "错误",
+        "model_answer": "错误。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "导线连接时，可使用不同规格、不同截面的导线进行连接。",
+        "standard_answer": "错误",
+        "model_answer": "知识库中未找到与您问题直接相关的文档内容。",
+        "correct": true
+      },
+      {
+        "question": "《电力安全工器具预防性试验规程》规定了各类安全工器具的试验要求。",
+        "standard_answer": "正确",
+        "model_answer": "错误。\n\n【参考来源】\n- 《变电运维.pdf》\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "“故障恢复供电时间一般为几十秒”",
+        "standard_answer": "错误",
+        "model_answer": "知识库中未找到与您问题直接相关的文档内容。",
+        "correct": true
+      },
+      {
+        "question": "配电自动化无法支持新能源接入和协调",
+        "standard_answer": "错误",
+        "model_answer": "错误。\n\n【参考来源】\n- 《配网运检.pdf》\n- 《配网运检.pdf》\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电自动化系统架构分为“两区三层”",
+        "standard_answer": "错误",
+        "model_answer": "错误\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "生产控制大区的核心目标是配电网安全可靠稳定运行",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "互联网大区主要支撑移动端查询、工单等业务应用",
+        "standard_answer": "正确",
+        "model_answer": "知识库中未找到与您问题直接相关的文档内容。",
+        "correct": true
+      },
+      {
+        "question": "配电主站是配电自动化系统的核心",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "DTU是安装在配电变压器低压出线处的终端",
+        "standard_answer": "错误",
+        "model_answer": "错误。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "FTU是安装在架空线路柱上开关处的终端",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "二遥动作型终端可实现就地故障自动隔离",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "EPON是“以太无源光网络”的英文缩写",
+        "standard_answer": "正确",
+        "model_answer": "知识库中未找到与您问题直接相关的文档内容。",
+        "correct": true
+      },
+      {
+        "question": "SCADA是配电自动化最基本的应用系统",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "馈线自动化(FA)的核心是故障定位、隔离和恢复供电",
+        "standard_answer": "正确",
+        "model_answer": "知识库中未找到与您问题直接相关的文档内容。",
+        "correct": true
+      },
+      {
+        "question": "主站集中型FA依赖通信和配电主站配合",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "就地重合式FA需要依赖主站和通信",
+        "standard_answer": "错误",
+        "model_answer": "错误\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电终端的运维主要由配电运检班负责",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "新上一二次融合环网箱的DTU应采用模块化、可扩展设计",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "IEC 61970/61968是电网自动化领域的重要国际标准",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "实用化是配电自动化发展及应用的重点",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电自动化是实现智能电网的重要基础之一",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电自动化建设推动了配电网运行管理水平的提升",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "加快配电网建设改造和智慧升级，强化源网荷储协同发展。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "配电网在形态上从传统的“无源”双向辐射网络向“有源”单向交互系统转变。",
+        "standard_answer": "错误",
+        "model_answer": "错误\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "加快构建新型配电系统，推进配电网柔性化、智能化、数字化转型。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "支持建设分布式独立储能和电网替代型储能，提升配电网与各类并网电力新业态的交互水平。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "金属氧化物避雷器具有非线性特性好，无续流等优点。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《变电运维.pdf》",
+        "correct": true
+      },
+      {
+        "question": "电容器的绝缘介质可以是纸介、薄膜或陶瓷材料。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "资产全寿命周期管理只关注设备的运维阶段。",
+        "standard_answer": "错误",
+        "model_answer": "错误\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "64 型隔离开关主刀合闸时，接地刀也可同时合闸。",
+        "standard_answer": "错误",
+        "model_answer": "错误\n\n【参考来源】\n- 《变电运维.pdf》",
+        "correct": true
+      },
+      {
+        "question": "多小组作业时，需指定分组监护人，确保每个作业点均有专人监护。",
+        "standard_answer": "正确",
+        "model_answer": "知识库中未找到与您问题直接相关的文档内容。",
+        "correct": true
+      },
+      {
+        "question": "隔离开关的机械闭锁装置可防止带负荷拉合隔离开关。",
+        "standard_answer": "错误",
+        "model_answer": "正确\n\n【参考来源】\n- 《变电运维.pdf》",
+        "correct": true
+      },
+      {
+        "question": "红外热成像检测可在设备不停电的情况下进行，属于带电检测。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "整体性缺陷通常由局部放电引起。",
+        "standard_answer": "错误",
+        "model_answer": "错误。\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "出厂试验是对投备运行状态的定期检查。",
+        "standard_answer": "错误",
+        "model_answer": "错误\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      },
+      {
+        "question": "红外热成像检测可用于发现连接不良引起的发热。",
+        "standard_answer": "正确",
+        "model_answer": "正确\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      }
+    ]
+  },
+  "简答": {
+    "correct": 2,
+    "total": 9,
+    "details": [
+      {
+        "question": "架空配电线路的基础组成与附属设施是运维的基础认知，结合所学知识回答以下问题：（1）杆塔作为架空配电线路的\"骨架\"，其核心作用是什么？（2）接地装置被称为线路安全运行的\"生命线\"，主要用于哪两类保护？（3）架空配电线路的附属设施中，标识牌主要包含哪三种类型？",
+        "standard_answer": "（1）杆塔作为线路骨架，支撑导线、绝缘子及杆上设备，保持各相导线之间及对地的安全距离，并承受导线自重、风载、覆冰等外力。（2）接地装置主要用于：①防雷保护——雷击时将雷电流迅速泄入大地，保护设备；②故障保护——接地故障时提供故障电流通路、降低接触电压与跨步电压，保障人身和设备安全。（3）标识牌三种类型：杆号牌、警示牌（禁止攀登）、相序牌。",
+        "model_answer": "（1）杆塔作为架空配电线路的\"骨架\"，其核心作用是支撑导线和其它设备，保持线路的稳定性和安全性。\n\n（2）接地装置被称为线路安全运行的\"生命线\"，主要用于防雷保护和人身安全保护。\n\n（3）架空配电线路的附属设施中，标识牌主要包含警告型、指示型和警示型三种类型。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电线路缺陷管理与检修安全是运维的关键要点，结合缺陷等级和检修要求回答以下问题：（1）配电网设备缺陷按安全威胁程度分为哪三个等级？（2）危急缺陷发现后要求在多长时间内处理完毕？（3）保证配电线路检修工作安全的核心技术措施包含哪四项（答出核心关键词即可）？",
+        "standard_answer": "（1）危急缺陷、严重缺陷、一般缺陷三个等级（处理时限对应\"日、月、季\"）。（2）24小时内处理完毕（危急缺陷不过\"日\"）。（3）四项技术措施：停电、验电、装设接地线（含使用个人保安线）、悬挂标识牌和装设围栏。",
+        "model_answer": "（1）配电网设备缺陷按安全威胁程度分为三个等级：危急缺陷、严重缺陷和一般缺陷。  \n（2）危急缺陷发现后要求在24小时内处理完毕。  \n（3）保证配电线路检修工作安全的核心技术措施包含：停电、验电、接地、悬挂标示牌和装设遮栏（围栏）。  \n\n【参考来源】  \n- 《配网运检.pdf》  \n- 《变电检修.pdf》",
+        "correct": false
+      },
+      {
+        "question": "配电自动化的概念及核心优势是什么？对供电可靠性的具体体现是什么？",
+        "standard_answer": "概念：配电自动化是以一次网架和设备为基础，综合运用计算机、信息及通信等技术，通过与相关应用系统的信息集成，实现对配电网的监测、控制和快速故障隔离。核心优势：大幅缩短停电时间，将传统故障恢复的数小时缩短至几十秒；同时实现电力高效分配、隐患提前处理、新能源友好接入。对可靠性的具体体现：故障后1秒内上报位置→数秒内完成隔离与备用线路投切；用电高峰自动分流负荷避免跳闸；提前发现隐患并计划性检修、减少非计划停电；支持新能源接入、避免电压波动。",
+        "model_answer": "配电自动化是集计算机技术、数据传输、控制技术、现代化设备及管理于一体的综合信息管理系统，其目的是提高供电可靠性，改进电能质量，向用户提供优质服务，降低运行费用，减轻运行人员的劳动强度。\n\n核心优势是大幅缩短停电时间，将传统故障恢复时间由数小时缩短至几十秒。\n\n对供电可靠性的具体体现包括：优化配电网网架结构、应用配电自动化技术、进行配电网带电检测以及运用不停电作业技术。这些措施共同提升了供电的稳定性",
+        "correct": false
+      },
+      {
+        "question": "“三区四层”结构中，生产控制大区的核心目标？感知层的主要功能？平台层与上一代系统的核心差异？",
+        "standard_answer": "生产控制大区核心目标：以配电网安全可靠稳定运行为目标，支撑新型电力系统建设的分层分级协同控制。感知层主要功能：通过配电终端等感知设备采集开关位置、电压、电流等电气量和告警信息，以及环境温湿度等状态数据，并经配电终端上传。平台层核心差异：所有终端上传数据需先进入物联管理平台、数据应用需向平台申请，实现数据存储与管理的集中化、规范化，与上一代系统形成本质区别。",
+        "model_answer": "生产控制大区的核心目标是保障配电网安全可靠稳定运行。  \n感知层的主要功能是采集配电网的实时数据。  \n平台层与上一代系统的核心差异在于其具备更强的数据处理能力和智能化分析能力，支持更广泛的业务应用。\n\n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "馈线自动化按信息处理方式分为哪三类？主站集中型还包含哪两种方式？就地重合式FA的核心特点？",
+        "standard_answer": "三类：主站集中型、就地重合式、智能分布式。主站集中型包含：全自动、半自动两种方式。就地重合式核心特点：不依赖主站和通信，由终端自身收集处理现场信息，独立完成故障定位、隔离并恢复非故障区域供电。",
+        "model_answer": "馈线自动化按信息处理方式分为三类：主站集中型、就地重合式、智能分布式。\n\n主站集中型还包含全自动和半自动两种方式。\n\n就地重合式FA的核心特点：不依赖主站与通信，最常见的是电压时间型。\n\n【参考来源】\n- 《配网运检.pdf》",
+        "correct": true
+      },
+      {
+        "question": "新能源高比例接入给配电网带来的“多元化挑战”有哪些？",
+        "standard_answer": "① 网络形态发生深刻变化；② 资源配置效率有待升级；③ 状态感知能力明显不足；④ 调度控制模式有待变革；⑤ 能源互联生态尚未形成。",
+        "model_answer": "新能源高比例接入给配电网带来的“多元化挑战”包括：电压波动、影响保护适应性、影响电能质量、影响系统稳定性、影响规划与运行。  \n\n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "新能源（光伏）高比例接入对配电网的具体影响有哪些？",
+        "standard_answer": "① 电压波动（用户负荷小、电量倒送上网时引起电压波动、过电压，严重时烧坏用电设备）；② 保护适用性（分布式电源相当于多个电源点，对继电保护整定计算构成考验）；③ 电能质量（逆变、整流大量使用电力电子器件，产生谐波等扰动）。",
+        "model_answer": "新能源（光伏）高比例接入对配电网的具体影响包括：造成电压波动、影响保护适应性、影响电能质量、影响系统稳定性、影响规划与运行。  \n\n【参考来源】  \n- 《配网运检.pdf》",
+        "correct": false
+      },
+      {
+        "question": "资产全寿命周期管理包括哪五个核心阶段？",
+        "standard_answer": "（1）规划计划阶段：发展部牵头，基于电网负荷预测、能源结构转型及防灾减灾等需求，开展电网精准投资与网架结构规划，形成设备选型与配置方案，确保项目储备科学合理。（2）物资采购阶段：物资部主导，依据规划成果开展设备招标采购。通过供应商绩效评价、关键原材料与工艺管控，严控设备制造质量；利用实物“ID”实现设备从采购合同签订、监造、发货到领用的全过程信息追溯。（3）工程建设阶段：基建部统筹，设备部、调控中心等协同，负责设备的现场安装、调试与工程验收。此阶段强调施工质量管控，包括执行关键设备、关键部位的典型工艺工法，强化安装环节环境标准。调试与验收，包括推行“首检式验收”，提高试验见证标准，实现交接试验等原始数据全量数字化移交，确保设备“零缺陷”投运。协同与移交，包括通过实物“ID”与项目信息关联，实现设备台账、试验报告一键自动建档，解决传统模式下数据重复录入、资料整理繁杂的难题，高效完成向运检部门的资产与数据移交。（4）运维检修阶段：设备部主导，基于设备健康状态评估，执行以可靠性为中心的巡检、维护、检修及技改策略。利用实物“ID”开展数字化移动作业，实现设备状态、缺陷、检修全过程在线管理。（5）退役处置阶段：设备部组织技术鉴定，财务部参与经济性鉴定，共同决策设备报废或再利用。通过实物“ID”关联资产报废、废旧物资处置流程，形成资产闭环，并促进跨区域闲置设备资源调拨盘活。",
+        "model_answer": "资产全寿命周期管理包括以下五个核心阶段：\n\n1. 规划计划阶段  \n2. 物资采购阶段  \n3. 工程建设阶段  \n4. 运维检修阶段  \n5. 退役处置阶段  \n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": false
+      },
+      {
+        "question": "(1) 按设备状态划分，变电设备检测分为哪三类？(2) 根据以上三类，请分别列举 2 个典型试验项目？",
+        "standard_answer": "（1）分为停电试验、带电检测和在线监测三类。（2）停电试验典型项目：绝缘电阻测试、介质损耗测量（或绕组直流电阻测试、主绝缘耐压试验等）。带电检测典型项目：红外热成像检测、超声波/特高频局部放电检测（或接地电流测量等）。在线监测典型项目：变压器油中溶解气体在线监测、电容型设备介损在线监测（或断路器机械特性在线监测等）。",
+        "model_answer": "(1) 按设备状态划分，变电设备检测分为三类：停电试验、带电检测和在线监测。\n\n(2) 典型试验项目如下：\n- 停电试验：绝缘电阻测试、介质损耗测量。\n- 带电检测：红外热成像检测、超声波/特高频局部放电检测。\n- 在线监测：变压器油中溶解气体在线监测、电容型设备介损在线监测。\n\n【参考来源】\n- 《变电检修.pdf》",
+        "correct": true
+      }
+    ]
+  }
+}

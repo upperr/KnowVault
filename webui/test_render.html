@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>渲染测试</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .test { border: 1px solid #ccc; padding: 20px; margin: 10px 0; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #f0f0f0; }
+        pre { background: #f5f5f5; padding: 10px; }
+        code { background: #f5f5f5; padding: 2px 5px; }
+    </style>
+</head>
+<body>
+    <h1>Markdown 渲染测试</h1>
+    
+    <div class="test">
+        <h2>原始 Markdown:</h2>
+        <pre># 标题 1
+## 标题 2
+
+- 列表项 1
+- 列表项 2
+
+| 列 1 | 列 2 |
+|------|------|
+| 数据 1 | 数据 2 |
+
+**粗体** 和 `代码`</pre>
+    </div>
+    
+    <div class="test">
+        <h2>期望渲染效果:</h2>
+        <h1>标题 1</h1>
+        <h2>标题 2</h2>
+        <ul>
+            <li>列表项 1</li>
+            <li>列表项 2</li>
+        </ul>
+        <table>
+            <tr><th>列 1</th><th>列 2</th></tr>
+            <tr><td>数据 1</td><td>数据 2</td></tr>
+        </table>
+        <p><strong>粗体</strong> 和 <code>代码</code></p>
+    </div>
+    
+    <script>
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function renderMarkdown(text) {
+            if (!text) return '';
+            let html = text;
+            
+            // 保护代码块
+            const codeBlocks = [];
+            html = html.replace(/```([\s\S]*?)```/g, (match, code) => {
+                codeBlocks.push('<pre><code>' + escapeHtml(code) + '</code></pre>');
+                return '%%CODEBLOCK' + (codeBlocks.length - 1) + '%%';
+            });
+            
+            // 转义 HTML
+            html = escapeHtml(html);
+            
+            // 标题
+            html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+            
+            // 列表
+            html = html.replace(/^[-*] (.*$)/gm, '<li>$1</li>');
+            html = html.replace(/(\n<li>.*<\/li>)+/g, (m) => '<ul>' + m + '</ul>');
+            
+            // 表格
+            html = html.replace(/\n/g, '<br>');
+            
+            // 恢复代码块
+            codeBlocks.forEach((block, i) => {
+                html = html.replace('%%CODEBLOCK' + i + '%%', block);
+            });
+            
+            return html;
+        }
+        
+        // 测试
+        const testMd = `# 测试标题
+- 项目 1
+- 项目 2
+
+| 列 1 | 列 2 |
+|------|------|
+| A | B |`;
+        
+        console.log("输入:", testMd);
+        console.log("输出:", renderMarkdown(testMd));
+    </script>
+</body>
+</html>
