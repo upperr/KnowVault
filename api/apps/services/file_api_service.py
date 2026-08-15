@@ -605,3 +605,92 @@ def get_file_content(uid: str, file_id: str):
     if not check_file_team_permission(file, uid):
         return False, "no authorization"
     return True, file
+
+
+async def upload_and_parse_file(file_obj):
+    """
+    Upload and parse file content with multi-modal support (text, images, tables).
+    
+    :param file_obj: file object from request
+    :return: (success, content) or (success, error_message)
+    """
+    import io
+    import logging
+    from deepdoc.parser import DocxParser, TxtParser
+    from deepdoc.parser.excel_parser import RAGFlowExcelParser
+    from deepdoc.parser.html_parser import RAGFlowHtmlParser
+    from deepdoc.parser.json_parser import RAGFlowJsonParser
+    
+    try:
+        # Read file content (not async for werkzeug FileStorage)
+        file_bytes = file_obj.read()
+        file_name = file_obj.filename
+        ext = file_name.split('.')[-1].lower() if '.' in file_name else ''
+        
+        logger = logging.getLogger(__name__)
+        
+        # Parse based on file type - use multi-modal parsers where available
+        if ext == 'pdf':
+            # Use RAGFlowPdfParser for multi-modal parsing (text + images + tables)
+            from deepdoc.parser.pdf_parser import RAGFlowPdfParser
+            parser = RAGFlowPdfParser()
+            # need_image=True enables image/table extraction
+            result = parser(file_bytes, need_image=True, zoomin=3, return_html=True)
+        elif ext in ['doc', 'docx']:
+            parser = DocxParser()
+            result = parser(file_bytes)
+        elif ext == 'txt':
+            parser = TxtParser()
+            result = parser.parser_txt(file_bytes.decode('utf-8', errors='ignore'))
+        elif ext in ['xls', 'xlsx']:
+            parser = RAGFlowExcelParser()
+            result = parser(file_bytes)
+        elif ext == 'html':
+            parser = RAGFlowHtmlParser()
+            result = parser(file_bytes)
+        elif ext == 'json':
+            parser = RAGFlowJsonParser()
+            result = parser(file_bytes)
+        elif ext in ['md', 'markdown']:
+            # For markdown, just read as text
+            result = file_bytes.decode('utf-8', errors='ignore')
+        else:
+            # Default to text parsing
+            result = file_bytes.decode('utf-8', errors='ignore')
+        
+        # Extract content from parser result
+        # RAGFlowPdfParser returns: (boxes_list, tables_figures_list)
+        # boxes_list contains: [(text, layout_type), ...]
+        # tables_figures_list contains table HTML and figure images
+        if isinstance(result, (tuple, list)) and len(result) >= 2:
+            boxes = result[0]  # Text blocks with layout info
+            tbls_figs = result[1]  # Tables (HTML) and figures (images)
+            
+            # Extract text content from boxes
+            text_parts = []
+            for box in boxes:
+                if isinstance(box, (tuple, list)) and len(box) > 0:
+                    text_parts.append(str(box[0]))
+                elif isinstance(box, str):
+                    text_parts.append(box)
+            
+            # Add tables and figures if present
+            if tbls_figs:
+                for tbl_fig in tbls_figs:
+                    if isinstance(tbl_fig, (tuple, list)) and len(tbl_fig) > 1:
+                        # tbl_fig = (table_html, image_bytes) or similar
+                        if tbl_fig[0]:  # table HTML
+                            text_parts.append("\n" + str(tbl_fig[0]))
+                        # Note: images are stored but not converted to text in this step
+            
+            content = "\n".join(text_parts)
+        elif isinstance(result, (tuple, list)) and len(result) == 1:
+            content = result[0]
+        else:
+            content = str(result) if not isinstance(result, str) else result
+        
+        return True, content
+    except Exception as e:
+        logger = logging.getLogger(__name__)
+        logger.exception(f"[upload_and_parse_file] 解析失败：{e}")
+        return False, f"Failed to parse file: {str(e)}"

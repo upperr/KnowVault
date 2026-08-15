@@ -207,6 +207,8 @@ SUMMARY4MEMORY = load_prompt("summary4memory")
 RANK_MEMORY = load_prompt("rank_memory")
 META_FILTER = load_prompt("meta_filter")
 ASK_SUMMARY = load_prompt("ask_summary")
+DOC_CREATION_PROMPT = load_prompt("doc_creation")
+DOC_OPTIMIZATION_PROMPT = load_prompt("doc_optimization")
 
 PROMPT_JINJA_ENV = SandboxedEnvironment(autoescape=False, trim_blocks=True, lstrip_blocks=True)
 
@@ -997,3 +999,72 @@ async def multi_queries_gen(chat_mdl, question: str, query: str, missing_infos: 
     except Exception as e:
         logging.exception(e)
     return {}
+
+
+def creation(context: str, requirement: str, title: str = "", original_text: str = "") -> Tuple[str, str]:
+    """Render document creation prompt.
+    
+    Args:
+        context: Retrieved knowledge base document fragments
+        requirement: User's creation requirements
+        title: Document title (optional)
+        original_text: Original text for expansion/abridgment/rewriting/structuring (optional)
+        
+    Returns:
+        Tuple of (system_prompt, user_prompt)
+    """
+    title_line = f"文档标题：{title}" if title else ""
+    original_line = f"参考原文：{original_text}" if original_text else ""
+    
+    system_prompt = PROMPT_JINJA_ENV.from_string(DOC_CREATION_PROMPT).render(
+        context=context,
+        requirement=requirement,
+        title=title,
+        original_text=original_text
+    )
+    user_prompt = f"""请根据以下素材创作内容：
+
+{context}
+
+创作要求：
+{requirement}
+
+{title_line}
+{original_line}
+
+请开始创作（注意：
+1. 标题必须使用 Markdown 语法（# ## ###）配合编号格式（1.、1.1、1.1.1...）
+2. 标题前后、段落之间均不要有空行，保持格式紧凑
+3. 必须输出完整的文章，不要中途截断）："""
+    
+    return system_prompt, user_prompt
+
+
+def optimize(content: str, instruction: str = "") -> Tuple[str, str]:
+    """Render document optimization prompt.
+    
+    Args:
+        content: Original document content
+        instruction: User's optimization requirements
+        
+    Returns:
+        Tuple of (system_prompt, user_prompt)
+    """
+    if not instruction.strip():
+        instruction = "请对文档进行优化，改善表达方式、结构和格式"
+    
+    system_prompt = PROMPT_JINJA_ENV.from_string(DOC_OPTIMIZATION_PROMPT).render(
+        content=content,
+        instruction=instruction
+    )
+    user_prompt = f"""原文内容：
+
+{content[:8000]}
+
+用户要求：
+
+{instruction}
+
+请按照上述要求对文档进行优化，直接输出优化后的内容（使用 Markdown 格式，标题前后、段落之间均不要有空行）："""
+    
+    return system_prompt, user_prompt

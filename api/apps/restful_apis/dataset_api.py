@@ -18,7 +18,6 @@ import logging
 from peewee import OperationalError
 from quart import request, make_response
 from common.constants import RetCode
-from api.apps import login_required, current_user
 from api.utils.api_utils import get_error_argument_result, get_error_data_result, get_json_result, get_result, add_tenant_id_to_kwargs
 from api.utils.pagination_utils import DEFAULT_PAGE, DEFAULT_PAGE_SIZE, validate_rest_api_page, validate_rest_api_page_size
 from api.utils.validation_utils import (
@@ -35,7 +34,6 @@ from api.apps.services import dataset_api_service
 
 
 @manager.route("/datasets/tags/aggregation", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def aggregate_tags(tenant_id):
     dataset_ids = request.args.get("dataset_ids", "").split(",")
@@ -57,7 +55,6 @@ def aggregate_tags(tenant_id):
 
 
 @manager.route("/datasets/metadata/flattened", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def get_flattened_metadata(tenant_id):
     dataset_ids = request.args.get("dataset_ids", "").split(",")
@@ -79,7 +76,6 @@ def get_flattened_metadata(tenant_id):
 
 
 @manager.route("/datasets", methods=["POST"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def create(tenant_id: str = None):
     """
@@ -143,7 +139,7 @@ async def create(tenant_id: str = None):
 
     try:
         if not tenant_id:
-            tenant_id = current_user.id
+            tenant_id = "default"
         success, result = await dataset_api_service.create_dataset(tenant_id, req)
         if success:
             return get_result(data=result)
@@ -159,7 +155,6 @@ async def create(tenant_id: str = None):
 
 
 @manager.route("/datasets", methods=["DELETE"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def delete(tenant_id):
     """
@@ -218,7 +213,6 @@ async def delete(tenant_id):
 
 
 @manager.route("/datasets/<dataset_id>", methods=["PUT"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def update(tenant_id, dataset_id):
     """
@@ -305,7 +299,6 @@ async def update(tenant_id, dataset_id):
 
 
 @manager.route("/datasets", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def list_datasets(tenant_id):
     """
@@ -404,7 +397,6 @@ def list_datasets(tenant_id):
 
 
 @manager.route("/datasets/<dataset_id>", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def get_dataset(tenant_id, dataset_id):
     try:
@@ -421,7 +413,6 @@ def get_dataset(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/ingestions/summary", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def get_ingestion_summary(tenant_id, dataset_id):
     try:
@@ -438,7 +429,6 @@ def get_ingestion_summary(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/tags", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def list_tags(tenant_id, dataset_id):
     try:
@@ -455,7 +445,6 @@ def list_tags(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/tags", methods=["DELETE"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def delete_tags(tenant_id, dataset_id):
     req = await request.get_json()
@@ -478,7 +467,6 @@ async def delete_tags(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/tags", methods=["PUT"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def rename_tag(tenant_id, dataset_id):
     req = await request.get_json()
@@ -504,7 +492,6 @@ async def rename_tag(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/search", methods=["POST"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def search_datasets(tenant_id):
     """Search (retrieval test) across multiple datasets.
@@ -527,7 +514,6 @@ async def search_datasets(tenant_id):
 
 
 @manager.route("/datasets/<dataset_id>/search", methods=["POST"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def search(tenant_id, dataset_id):
     """Search (retrieval test) within a dataset.
@@ -557,7 +543,6 @@ async def search(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/graph", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def get_knowledge_graph(tenant_id, dataset_id):
     """Get the knowledge graph of a dataset.
@@ -579,7 +564,6 @@ async def get_knowledge_graph(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts", methods=["HEAD"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def has_any_wiki(tenant_id, dataset_id):
     """Probe whether this dataset has any compiled artifact pages.
@@ -597,7 +581,6 @@ async def has_any_wiki(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def list_wiki_pages(tenant_id, dataset_id):
     """List artifact pages for the dataset Artifact tab.
@@ -631,7 +614,6 @@ async def list_wiki_pages(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts/topics", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def list_wiki_topics(tenant_id, dataset_id):
     """List wiki topics for the dataset Artifact tab.
@@ -661,7 +643,6 @@ async def list_wiki_topics(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts/graph", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def get_wiki_graph(tenant_id, dataset_id):
     """Return an incremental slice of the canvas graph for this dataset.
@@ -706,7 +687,6 @@ async def get_wiki_graph(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts/structure", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def get_dataset_structure(tenant_id, dataset_id):
     """Return the dataset-scope (KB-wide) structure graph for one kind.
@@ -753,7 +733,6 @@ async def get_dataset_structure(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts/structure", methods=["DELETE"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def delete_dataset_structure(tenant_id, dataset_id):
     """Delete the dataset-scope (KB-wide) structure graph for one kind.
@@ -794,7 +773,6 @@ def delete_dataset_structure(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts/alteration", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def get_wiki_alteration(tenant_id, dataset_id):
     """Return document drift for a compiled dataset product.
@@ -821,7 +799,6 @@ async def get_wiki_alteration(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts", methods=["DELETE"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def clear_wiki(tenant_id, dataset_id):
     """Wipe every artifact-related row from ES for this KB.
@@ -845,7 +822,6 @@ async def clear_wiki(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts/<page_type>/<path:slug>", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def get_wiki_page(tenant_id, dataset_id, page_type, slug):
     """Fetch one artifact page by (page_type, slug).
@@ -872,7 +848,6 @@ async def get_wiki_page(tenant_id, dataset_id, page_type, slug):
 
 
 @manager.route("/datasets/<dataset_id>/skills", methods=["HEAD"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def has_any_skill(tenant_id, dataset_id):
     """Probe whether this dataset has a compiled Corpus2Skill tree."""
@@ -886,7 +861,6 @@ async def has_any_skill(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/skills", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def get_skill_tree(tenant_id, dataset_id):
     """Fetch the aggregate recursive Corpus2Skill tree for this dataset.
@@ -908,7 +882,6 @@ async def get_skill_tree(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/skills", methods=["DELETE"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def delete_all_skills(tenant_id, dataset_id):
     """Delete every compiled skill for this dataset.
@@ -930,7 +903,6 @@ async def delete_all_skills(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/skills/<path:skill_kwd>", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def get_skill_page(tenant_id, dataset_id, skill_kwd):
     """Fetch full markdown for one Corpus2Skill node by skill_kwd.
@@ -953,7 +925,6 @@ async def get_skill_page(tenant_id, dataset_id, skill_kwd):
 
 
 @manager.route("/datasets/<dataset_id>/navigation", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def list_dataset_nav(tenant_id, dataset_id):
     """First level of the dataset navigation tree — the top-level clusters.
@@ -975,7 +946,6 @@ async def list_dataset_nav(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/navigation/<path:name>/children", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def list_dataset_nav_children(tenant_id, dataset_id, name):
     """Direct children of a navigation node (hierarchical, one level per call).
@@ -998,7 +968,6 @@ async def list_dataset_nav_children(tenant_id, dataset_id, name):
 
 
 @manager.route("/datasets/<dataset_id>/navigation", methods=["DELETE"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def delete_dataset_nav(tenant_id, dataset_id):
     """Delete the entire dataset navigation tree.
@@ -1020,7 +989,6 @@ async def delete_dataset_nav(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/navigation/<path:name>", methods=["DELETE"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def delete_dataset_nav_node(tenant_id, dataset_id, name):
     """Delete one navigation node and its whole subtree.
@@ -1043,7 +1011,6 @@ async def delete_dataset_nav_node(tenant_id, dataset_id, name):
 
 
 @manager.route("/datasets/<dataset_id>/skills/<path:skill_kwd>", methods=["DELETE"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def delete_skill_page(tenant_id, dataset_id, skill_kwd):
     """Delete one compiled skill node by skill_kwd.
@@ -1078,7 +1045,6 @@ async def delete_skill_page(tenant_id, dataset_id, skill_kwd):
 
 
 @manager.route("/datasets/<dataset_id>/artifacts/<page_type>/<path:slug>", methods=["PUT"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def update_wiki_page(tenant_id, dataset_id, page_type, slug):
     """Edit one artifact page in place.
@@ -1111,7 +1077,7 @@ async def update_wiki_page(tenant_id, dataset_id, page_type, slug):
             page_type,
             slug,
             content_md,
-            user_id=getattr(current_user, "id", None),
+            user_id=current_user.id,
             title=title,
             comments=comments,
         )
@@ -1124,7 +1090,6 @@ async def update_wiki_page(tenant_id, dataset_id, page_type, slug):
 
 
 @manager.route("/datasets/<dataset_id>/index", methods=["POST"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def run_index(tenant_id, dataset_id):
     index_type = request.args.get("type", "")
@@ -1143,7 +1108,6 @@ async def run_index(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/index", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def trace_index(tenant_id, dataset_id):
     index_type = request.args.get("type", "")
@@ -1163,7 +1127,6 @@ def trace_index(tenant_id, dataset_id):
 
 @manager.route("/datasets/<dataset_id>/<index_type>", methods=["DELETE"])  # noqa: F821
 @manager.route("/datasets/<dataset_id>/index", methods=["DELETE"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def delete_index(tenant_id, dataset_id, index_type=None):
     index_type = (index_type or request.args.get("type", "")).lower()
@@ -1189,7 +1152,6 @@ def delete_index(tenant_id, dataset_id, index_type=None):
 
 
 @manager.route("/datasets/<dataset_id>/embedding/check", methods=["POST"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def check_embedding(tenant_id, dataset_id):
     try:
@@ -1209,7 +1171,6 @@ async def check_embedding(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/ingestions", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def list_ingestion_logs(tenant_id, dataset_id):
     try:
@@ -1235,7 +1196,6 @@ def list_ingestion_logs(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/ingestions/<log_id>", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def get_ingestion_log(tenant_id, dataset_id, log_id):
     try:
@@ -1252,7 +1212,6 @@ def get_ingestion_log(tenant_id, dataset_id, log_id):
 
 
 @manager.route("/datasets/<dataset_id>/metadata/config", methods=["GET"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 def get_auto_metadata(tenant_id, dataset_id):
     """
@@ -1293,7 +1252,6 @@ def get_auto_metadata(tenant_id, dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/metadata/config", methods=["PUT"])  # noqa: F821
-@login_required
 @add_tenant_id_to_kwargs
 async def update_auto_metadata(tenant_id, dataset_id):
     """

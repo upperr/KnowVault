@@ -165,14 +165,26 @@ async def _ensure_owned_chat(chat_id):
     return await thread_pool_exec(DialogService.query, tenant_id=current_user.id, id=chat_id, status=StatusEnum.VALID.value)
 
 
-def _build_default_completion_dialog():
+def _build_default_completion_dialog(dataset_ids=None):
+    prompt_config = deepcopy(_DEFAULT_DIRECT_CHAT_PROMPT_CONFIG)
+    # 当有知识库时，启用引用功能
+    if dataset_ids:
+        prompt_config["quote"] = True
+        prompt_config["system"] = (
+            "You are an intelligent assistant. Please answer the question based on the following knowledge. "
+            "When all knowledge content is irrelevant to the question, your answer must include the sentence "
+            '"The answer you are looking for is not found in the knowledge base!"\\n'
+            "Here is the knowledge base:\\n{knowledge}\\nThe above is the knowledge base."
+        )
+        prompt_config["parameters"] = [{"key": "knowledge", "optional": False}]
+    
     return SimpleNamespace(
         tenant_id=current_user.id,
         llm_id="",
         tenant_llm_id=None,
         llm_setting={},
-        prompt_config=deepcopy(_DEFAULT_DIRECT_CHAT_PROMPT_CONFIG),
-        kb_ids=[],
+        prompt_config=prompt_config,
+        kb_ids=dataset_ids or [],
         top_n=6,
         top_k=1024,
         rerank_id="",
@@ -1230,6 +1242,16 @@ async def session_completion(chat_id_in_arg=""):
                     msg.append(m)
         else:
             dia = _build_default_completion_dialog()
+            # 处理 dataset_ids 参数（直接问答模式）
+            dataset_ids = req.pop("dataset_ids", None)
+            if dataset_ids:
+                kb_ids_result = await _validate_dataset_ids(dataset_ids, current_user.id)
+                if isinstance(kb_ids_result, str):
+                    return get_data_error_result(message=kb_ids_result)
+                # 重新构建 dialog，传入 dataset_ids
+                dia = _build_default_completion_dialog(kb_ids_result)
+                # 确保 quote 参数为 True，以便返回引用
+                req["quote"] = True
 
         req.pop("messages", None)
         req.pop("question", None)

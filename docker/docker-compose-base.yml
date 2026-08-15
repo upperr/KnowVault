@@ -183,29 +183,61 @@ services:
       retries: 120
     restart: unless-stopped
 
-  mysql:
-    # mysql:5.7 linux/arm64 image is unavailable.
-    image: mysql:8.0.40
+  # mysql:
+  #   profiles:
+  #     - mysql
+  #   # mysql:5.7 linux/arm64 image is unavailable.
+  #   image: mysql:8.0.40
+  #   env_file: .env
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+  #   command:
+  #     --max_connections=1000
+  #     --character-set-server=utf8mb4
+  #     --collation-server=utf8mb4_unicode_ci
+  #     --default-authentication-plugin=mysql_native_password
+  #     --tls_version="TLSv1.2,TLSv1.3"
+  #     --init-file /data/application/init.sql
+  #     --binlog_expire_logs_seconds=604800
+  #   ports:
+  #     - ${EXPOSE_MYSQL_PORT}:3306
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+  #     - ./init.sql:/data/application/init.sql
+  #   networks:
+  #     - ragflow
+  #   healthcheck:
+  #     test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-p${MYSQL_PASSWORD}"]
+  #     interval: 10s
+  #     timeout: 10s
+  #     retries: 120
+  #   restart: unless-stopped
+
+  postgres:
+    profiles:
+      - postgres
+    image: postgres:16
     env_file: .env
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DBNAME:-rag_flow}
+      - POSTGRES_USER=${POSTGRES_USER:-rag_flow}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-infini_rag_flow}
     command:
-      --max_connections=1000
-      --character-set-server=utf8mb4
-      --collation-server=utf8mb4_unicode_ci
-      --default-authentication-plugin=mysql_native_password
-      --tls_version="TLSv1.2,TLSv1.3"
-      --init-file /data/application/init.sql
-      --binlog_expire_logs_seconds=604800
+      - -c
+      - max_connections=1000
+      - -c
+      - shared_buffers=256MB
+      - -c
+      - work_mem=16MB
     ports:
-      - ${EXPOSE_MYSQL_PORT}:3306
+      - ${POSTGRES_PORT:-5432}:5432
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./init.sql:/data/application/init.sql
+      - postgres_data:/var/lib/postgresql/data
+      - ./init_postgres.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - ragflow
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-p${MYSQL_PASSWORD}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-rag_flow} -d ${POSTGRES_DBNAME:-rag_flow}"]
       interval: 10s
       timeout: 10s
       retries: 120
@@ -384,7 +416,9 @@ volumes:
     driver: local
   seekdb_data:
     driver: local
-  mysql_data:
+  # mysql_data:
+  #   driver: local
+  postgres_data:
     driver: local
   minio_data:
     driver: local

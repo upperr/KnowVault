@@ -17,10 +17,21 @@ set -e
 PY="${PY:-python3}"
 CONFIG="${1:-conf/service_conf.yaml}"
 
+# Detect database type from environment
+DB_TYPE="${DB_TYPE:-mysql}"
+
+if [ "$DB_TYPE" = "postgres" ] || [ "$DB_TYPE" = "postgresql" ]; then
+    MIGRATION_SCRIPT="tools/scripts/postgres_migration.py"
+    echo "Using PostgreSQL migration script..."
+else
+    MIGRATION_SCRIPT="tools/scripts/mysql_migration.py"
+    echo "Using MySQL migration script..."
+fi
+
 echo "Running model provider table migrations..."
 
 # Step 1: Create base model provider tables
-"$PY" tools/scripts/mysql_migration.py \
+"$PY" "$MIGRATION_SCRIPT" \
     --stages tenant_model_provider,tenant_model_instance,tenant_model,model_id_config \
     --config "$CONFIG" \
     --execute \
@@ -28,7 +39,7 @@ echo "Running model provider table migrations..."
     --mark-database-version-on-success
 
 # Step 2: Seed, merge model types, and migrate model IDs
-"$PY" tools/scripts/mysql_migration.py \
+"$PY" "$MIGRATION_SCRIPT" \
     --stages tenant_model_seeding,model_type_merge,tenant_model_id_migration \
     --config "$CONFIG" \
     --execute \

@@ -73,6 +73,9 @@ app.errorhandler(Exception)(server_error_response)
 app.config["RESPONSE_TIMEOUT"] = int(os.environ.get("QUART_RESPONSE_TIMEOUT", 600))
 app.config["BODY_TIMEOUT"] = int(os.environ.get("QUART_BODY_TIMEOUT", 600))
 
+# Ensure proper Chinese character encoding in JSON responses
+app.config["JSON_AS_ASCII"] = False
+
 ## convince for dev and debug
 # app.config["LOGIN_DISABLED"] = True
 app.config["SESSION_PERMANENT"] = False
@@ -229,7 +232,24 @@ def _load_user(auth_types=None):
     return None
 
 
-current_user = LocalProxy(_load_user)
+def _create_default_user():
+    """创建默认用户对象（用于开发/测试环境）"""
+    class DefaultUser:
+        def __init__(self):
+            self.id = "default"
+            self.email = "default@ragflow.io"
+            self.access_token = "default_token"
+            self.status = "1"
+            self.nickname = "Default User"
+            self.is_authenticated = True
+    
+    return DefaultUser()
+
+
+# 环境变量控制是否使用默认用户（开发/测试环境）
+USE_DEFAULT_USER = os.getenv("RAGFLOW_USE_DEFAULT_USER", "false").lower() == "true"
+
+current_user = LocalProxy(lambda: _load_user() or (_create_default_user() if USE_DEFAULT_USER else None))
 
 
 def login_required(func: Callable[P, Awaitable[T]] = None, auth_types=None) -> Callable[P, Awaitable[T]]:
@@ -257,7 +277,8 @@ def login_required(func: Callable[P, Awaitable[T]] = None, auth_types=None) -> C
         async def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
             timing_enabled = os.getenv("RAGFLOW_API_TIMING")
             t_start = time.perf_counter() if timing_enabled else None
-            user = _load_user(auth_types)
+            # 使用 current_user 而不是 _load_user，这样默认用户逻辑会生效
+            user = current_user._get_current_object()
             if timing_enabled:
                 logging.info(
                     "api_timing login_required auth_ms=%.2f path=%s",

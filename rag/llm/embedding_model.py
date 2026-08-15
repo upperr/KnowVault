@@ -879,6 +879,15 @@ class OpenAI_APIEmbed(OpenAIEmbed):
         self.client = OpenAI(api_key=key, base_url=base_url)
         self.model_name = model_name.split("___")[0]
 
+    def encode(self, texts: list):
+        # OpenAI-API-Compatible providers (e.g., DashScope) may have stricter batch size limits.
+        # DashScope text-embedding-v3 requires batch_size <= 10.
+        return self._batched_encode(texts, self._call, batch_size=10, truncate_to=8191)
+
+    def encode_queries(self, text):
+        vectors, token_count = self._batched_encode([text], self._call, batch_size=10, truncate_to=8191)
+        return vectors[0], token_count
+
 
 class GreenPTEmbed(OpenAIEmbed):
     """GreenPT OpenAI-compatible embedding adapter."""

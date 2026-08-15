@@ -50,7 +50,7 @@ import logging
 from quart import Blueprint, jsonify, request
 
 from api.apps import login_required
-from api.apps.restful_apis import agent_api, chat_api, chunk_api, dataset_api, document_api, file2document_api, file_api, openai_api
+from api.apps.restful_apis import agent_api, chat_api, chunk_api, dataset_api, document_api, file2document_api, file_api, file_sync_api, openai_api
 from api.apps.restful_apis.system_api import run_health_checks
 from api.apps.services import dataset_api_service, file_api_service
 from api.utils.api_utils import add_tenant_id_to_kwargs, get_data_error_result, get_json_result, get_request_json
@@ -124,7 +124,6 @@ async def deprecated_openai_chat_completions(chat_id):
 
 
 @manager.route("/agents_openai/<agent_id>/chat/completions", methods=["POST"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_agents_openai_chat_completions(agent_id, tenant_id=None):
     """
@@ -183,7 +182,6 @@ async def deprecated_delete_knowledge_graph(dataset_id):
 
 
 @manager.route("/datasets/<dataset_id>/run_graphrag", methods=["POST"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_run_graphrag(dataset_id, tenant_id=None):
     """
@@ -201,7 +199,6 @@ async def deprecated_run_graphrag(dataset_id, tenant_id=None):
 
 
 @manager.route("/datasets/<dataset_id>/trace_graphrag", methods=["GET"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_trace_graphrag(dataset_id, tenant_id=None):
     """
@@ -219,7 +216,6 @@ async def deprecated_trace_graphrag(dataset_id, tenant_id=None):
 
 
 @manager.route("/datasets/<dataset_id>/run_raptor", methods=["POST"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_run_raptor(dataset_id, tenant_id=None):
     """
@@ -237,7 +233,6 @@ async def deprecated_run_raptor(dataset_id, tenant_id=None):
 
 
 @manager.route("/datasets/<dataset_id>/trace_raptor", methods=["GET"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_trace_raptor(dataset_id, tenant_id=None):
     """
@@ -260,7 +255,6 @@ async def deprecated_trace_raptor(dataset_id, tenant_id=None):
 
 
 @manager.route("/chats/<chat_id>/sessions/<session_id>", methods=["PUT"])
-@login_required
 async def deprecated_update_session(chat_id, session_id):
     """
     Deprecated: Use PATCH /api/v1/chats/{chat_id}/sessions/{session_id} instead.
@@ -285,7 +279,6 @@ async def deprecated_update_session(chat_id, session_id):
 
 
 @manager.route("/file/get/<file_id>", methods=["GET"])
-@login_required
 async def deprecated_file_get(file_id):
     """
     Deprecated: Use GET /api/v1/files/{file_id} instead.
@@ -303,7 +296,6 @@ async def deprecated_file_get(file_id):
 
 
 @manager.route("/file/list", methods=["GET"])
-@login_required
 async def deprecated_file_list():
     """
     Deprecated: Use GET /api/v1/files instead.
@@ -317,7 +309,6 @@ async def deprecated_file_list():
 
 
 @manager.route("/file/all_parent_folder", methods=["GET"])
-@login_required
 async def deprecated_file_all_parent_folder():
     """
     Deprecated: Use GET /api/v1/files/{file_id}/ancestors instead.
@@ -337,7 +328,6 @@ async def deprecated_file_all_parent_folder():
 
 
 @manager.route("/file/parent_folder", methods=["GET"])
-@login_required
 async def deprecated_file_parent_folder():
     """
     Deprecated: Use GET /api/v1/files/{file_id}/parent instead.
@@ -357,7 +347,6 @@ async def deprecated_file_parent_folder():
 
 
 @manager.route("/file/root_folder", methods=["GET"])
-@login_required
 async def deprecated_file_root_folder():
     """
     Deprecated: Root folder is now accessible via GET /api/v1/files with parent_id=...
@@ -371,7 +360,6 @@ async def deprecated_file_root_folder():
 
 
 @manager.route("/file/create", methods=["POST"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_file_create(tenant_id=None):
     """
@@ -386,7 +374,6 @@ async def deprecated_file_create(tenant_id=None):
 
 
 @manager.route("/file/upload", methods=["POST"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_file_upload(tenant_id=None):
     """
@@ -401,7 +388,6 @@ async def deprecated_file_upload(tenant_id=None):
 
 
 @manager.route("/file/convert", methods=["POST"])
-@login_required
 async def deprecated_file_convert():
     """
     Deprecated: Use POST /api/v1/files/link-to-datasets instead.
@@ -414,7 +400,6 @@ async def deprecated_file_convert():
 
 
 @manager.route("/file/mv", methods=["POST"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_file_mv(tenant_id=None):
     """
@@ -429,7 +414,6 @@ async def deprecated_file_mv(tenant_id=None):
 
 
 @manager.route("/file/rename", methods=["POST"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_file_rename(tenant_id=None):
     """
@@ -457,7 +441,6 @@ async def deprecated_file_rename(tenant_id=None):
 
 
 @manager.route("/file/rm", methods=["POST"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_file_rm(tenant_id=None):
     """
@@ -497,7 +480,6 @@ async def deprecated_related_questions():
 
 
 @manager.route("/datasets/<dataset_id>/documents/<document_id>/chunks/<chunk_id>", methods=["PUT"])
-@login_required
 async def deprecated_update_chunk(dataset_id, document_id, chunk_id):
     """
     Deprecated: Use PATCH /api/v1/datasets/{dataset_id}/documents/{document_id}/chunks/{chunk_id} instead.
@@ -521,7 +503,6 @@ async def deprecated_update_chunk(dataset_id, document_id, chunk_id):
 
 
 @manager.route("/file/upload_info", methods=["POST"])
-@login_required
 async def deprecated_file_upload_info():
     """
     Deprecated: Use POST /api/v1/documents/upload instead.
@@ -539,7 +520,6 @@ async def deprecated_file_upload_info():
 
 
 @legacy_v1_manager.route("/document/upload_info", methods=["POST"])
-@login_required
 async def deprecated_legacy_document_upload_info():
     """
     Deprecated: Use POST /api/v1/documents/upload instead.
@@ -560,7 +540,6 @@ async def deprecated_legacy_document_upload_info():
 
 
 @manager.route("/datasets/<dataset_id>/documents/<document_id>", methods=["PUT"])
-@login_required
 async def deprecated_update_document(dataset_id, document_id):
     """
     Deprecated: Use PATCH /api/v1/datasets/{dataset_id}/documents/{document_id} instead.
@@ -612,7 +591,6 @@ async def deprecated_document_download(doc_id):
 
 
 @legacy_v1_manager.route("/document/download/<attachment_id>", methods=["GET"])
-@login_required
 async def document_download_v1(attachment_id):
     """
     Compatibility alias for document download under /v1.
@@ -634,7 +612,6 @@ async def document_download_v1(attachment_id):
 
 
 @manager.route("/agents/<agent_id>/completions", methods=["POST"])
-@login_required
 @add_tenant_id_to_kwargs
 async def deprecated_agent_completions(agent_id, tenant_id=None):
     """

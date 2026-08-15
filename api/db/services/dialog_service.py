@@ -802,6 +802,9 @@ async def async_chat(dialog, messages, stream=True, **kwargs):
         _enrich_chunks_with_document_metadata(kbinfos.get("chunks", []), metadata_fields)
 
     knowledges = kb_prompt(kbinfos, max_tokens)
+    logging.info("ASYNC_CHAT DEBUG: knowledges=%d, chunks=%d, prompt_config.quote=%s, kwargs.quote=%s, dialog.kb_ids=%s", 
+                  len(knowledges), len(kbinfos.get("chunks", [])), 
+                  prompt_config.get("quote", True), kwargs.get("quote", True), dialog.kb_ids)
     logging.debug("{}->{}".format(" ".join(questions), "\n->".join(knowledges)))
 
     retrieval_ts = timer()

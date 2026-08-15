@@ -6,15 +6,15 @@ ragflow:
 admin:
   host: ${RAGFLOW_HOST:-0.0.0.0}
   http_port: 9381
-mysql:
-  name: '${MYSQL_DBNAME:-rag_flow}'
-  user: '${MYSQL_USER:-root}'
-  password: '${MYSQL_PASSWORD:-infini_rag_flow}'
-  host: '${MYSQL_HOST:-mysql}'
-  port: ${MYSQL_PORT:-3306}
-  max_connections: 900
-  stale_timeout: 300
-  max_allowed_packet: ${MYSQL_MAX_PACKET:-1073741824}
+# mysql:
+#   name: '${MYSQL_DBNAME:-rag_flow}'
+#   user: 'root'
+#   password: '${MYSQL_PASSWORD:-infini_rag_flow}'
+#   host: '${MYSQL_HOST:-mysql}'
+#   port: ${MYSQL_PORT:-3306}
+#   max_connections: 900
+#   stale_timeout: 300
+#   max_allowed_packet: ${MYSQL_MAX_PACKET:-1073741824}
 minio:
   user: '${MINIO_USER:-rag_flow}'
   password: '${MINIO_PASSWORD:-infini_rag_flow}'
@@ -84,11 +84,44 @@ ingestor:
 file_syncer:
   max_concurrent_syncs: 1
   sync_interval: 3
+# =============================================================================
+# OpenAI-Compatible Model Configuration
+# =============================================================================
+# This configuration uses OpenAI-compatible API format.
+# To switch to local deployment, only modify base_url and model names.
+#
+# Common local deployment options:
+#   - Ollama:      base_url: 'http://host.docker.internal:11434/v1'
+#   - vLLM:        base_url: 'http://host.docker.internal:8000/v1'
+#   - LM Studio:   base_url: 'http://host.docker.internal:1234/v1'
+#   - LocalAI:     base_url: 'http://host.docker.internal:8080/v1'
+#
+# For macOS/Linux, use 'host.docker.internal' to access host from container.
+# For Windows Docker Desktop, 'host.docker.internal' also works.
+# =============================================================================
 user_default_llm:
+  factory: 'OpenAI-API-Compatible'
+  api_key: 'sk-0c2e7432f5a44a88866f6c98fdae182f'
+  base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'  # Change to local URL for local deployment
   default_models:
+    chat_model:
+      name: 'qwen-turbo'           # e.g., 'llama3.1:8b' for Ollama
     embedding_model:
-      api_key: 'xxx'
-      base_url: 'http://${TEI_HOST}:80'
+      name: 'text-embedding-v4'    # e.g., 'nomic-embed-text' for Ollama
+    rerank_model:
+      name: 'bge-reranker-v2'      # e.g., 'bge-reranker-v2' for local rerank
+    vision_model:
+      name: 'qwen-vl-plus'         # e.g., 'llava' for Ollama
+    asr_model:
+      name: 'whisper-large-v3'     # e.g., 'whisper-large-v3' for local ASR
+postgres:
+  name: '${POSTGRES_DBNAME:-rag_flow}'
+  user: '${POSTGRES_USER:-rag_flow}'
+  password: '${POSTGRES_PASSWORD:-infini_rag_flow}'
+  host: '${POSTGRES_HOST:-postgres}'
+  port: ${POSTGRES_PORT:-5432}
+  max_connections: 100
+  stale_timeout: 30
 # postgres:
 #   name: '${POSTGRES_DBNAME:-rag_flow}'
 #   user: '${POSTGRES_USER:-rag_flow}'

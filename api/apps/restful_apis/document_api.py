@@ -19,6 +19,8 @@ import logging
 import json
 import os
 import re
+import zipfile
+import tempfile
 from pathlib import Path
 
 from quart import request, make_response, send_file
@@ -47,7 +49,8 @@ from api.db.services.file_service import FileService
 from api.db.services.knowledgebase_service import KnowledgebaseService
 from api.db.services.canvas_service import UserCanvasService
 from api.common.check_team_permission import check_kb_team_permission
-from api.db.services.task_service import TaskService, cancel_all_task_of
+from api.db.services.task_service import TaskService, cancel_all_task_of, queue_tasks
+from api.db.db_models import File2Document
 from api.utils.api_utils import (
     construct_json_result,
     get_data_error_result,
@@ -156,6 +159,223 @@ async def upload_info(tenant_id: str):
         return get_result(data=results)
     except Exception as e:
         logging.exception("upload_info failed")
+        return server_error_response(e)
+
+
+@manager.route("/datasets/<dataset_id>/documents/upload_zip", methods=["POST"])  # noqa: F821
+@login_required
+@add_tenant_id_to_kwargs
+async def upload_zip_to_dataset(tenant_id, dataset_id):
+    """
+    Upload a ZIP file to dataset, automatically extract and parse documents using RAGFlow native pipeline.
+    ---
+    tags:
+      - Documents
+    security:
+      - ApiKeyAuth: []
+    parameters:
+      - in: path
+        name: dataset_id
+        type: string
+        required: true
+        description: ID of the dataset.
+      - in: header
+        name: Authorization
+        type: string
+        required: true
+        description: Bearer token for authentication.
+      - in: formData
+        name: file
+        type: file
+        required: true
+        description: ZIP file containing documents.
+    responses:
+      200:
+        description: Successful operation.
+    """
+    from api.apps import current_user
+    from werkzeug.datastructures import FileStorage
+    
+    # Verify dataset ownership
+    if not KnowledgebaseService.accessible(kb_id=dataset_id, user_id=tenant_id):
+        return get_error_data_result(message=f"You don't own the dataset {dataset_id}")
+    
+    e, kb = KnowledgebaseService.get_by_id(dataset_id)
+    if not e:
+        return get_error_data_result(message="Dataset not found")
+    
+    files = await request.files
+    file_objs = files.getlist("file") if files and files.get("file") else []
+    
+    if not file_objs:
+        return get_error_argument_result("No file provided")
+    
+    if len(file_objs) > 1:
+        return get_error_argument_result("Only one ZIP file allowed")
+    
+    zip_file = file_objs[0]
+    if not zip_file.filename.lower().endswith('.zip'):
+        return get_error_argument_result("File must be a ZIP archive")
+    
+    # Supported file extensions
+    SUPPORTED_EXTENSIONS = {'.pdf', '.doc', '.docx', '.txt', '.md', '.xls', '.xlsx', '.ppt', '.pptx'}
+    
+    try:
+        # Read ZIP file content
+        zip_content = zip_file.read()
+        logging.info(f"Received ZIP file: {zip_file.filename}, size: {len(zip_content)} bytes")
+        
+        # Extract ZIP to temporary directory
+        with tempfile.TemporaryDirectory() as temp_dir:
+            zip_path = os.path.join(temp_dir, zip_file.filename)
+            with open(zip_path, 'wb') as f:
+                f.write(zip_content)
+            
+            # Extract ZIP with proper Chinese filename encoding handling
+            extract_dir = os.path.join(temp_dir, 'extracted')
+            os.makedirs(extract_dir, exist_ok=True)
+            
+            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                # Handle Chinese filename encoding for ZIP files created on Windows
+                # Windows ZIP uses GBK encoding for Chinese filenames, while Python expects UTF-8
+                for info in zip_ref.infolist():
+                    original_filename = info.filename
+                    
+                    # Try multiple encoding fixes
+                    fixed_filename = None
+                    
+                    # Method 1: UTF-8 mojibake fix (CP437 -> UTF-8)
+                    if isinstance(original_filename, str):
+                        try:
+                            # This fixes the case where UTF-8 bytes were decoded as CP437/Latin-1
+                            candidate = original_filename.encode('cp437').decode('utf-8')
+                            # Verify it contains valid Chinese characters
+                            if any('\u4e00' <= c <= '\u9fff' for c in candidate):
+                                fixed_filename = candidate
+                                logging.info(f"Fixed filename encoding (CP437->UTF-8): {original_filename} -> {fixed_filename}")
+                        except (UnicodeDecodeError, UnicodeEncodeError):
+                            pass
+                    
+                    # Method 2: Try GBK encoding (common for Chinese Windows systems)
+                    if fixed_filename is None and isinstance(original_filename, str):
+                        try:
+                            # Try interpreting as Latin-1 bytes then decode as GBK
+                            candidate = original_filename.encode('latin-1').decode('gbk')
+                            if any('\u4e00' <= c <= '\u9fff' for c in candidate):
+                                fixed_filename = candidate
+                                logging.info(f"Fixed filename encoding (Latin-1->GBK): {original_filename} -> {fixed_filename}")
+                        except (UnicodeDecodeError, UnicodeEncodeError):
+                            pass
+                    
+                    # Apply the fixed filename if available
+                    if fixed_filename:
+                        info.filename = fixed_filename
+                    
+                    # Extract the file
+                    zip_ref.extract(info, extract_dir)
+            
+            logging.info(f"Extracted ZIP to: {extract_dir}")
+            
+            # Process extracted files using RAGFlow native upload
+            file_service = FileService()
+            
+            added_count = 0
+            updated_count = 0
+            failed_count = 0
+            failed_files = []
+            
+            for root, dirs, files_in_dir in os.walk(extract_dir):
+                for filename in files_in_dir:
+                    file_path = Path(root) / filename
+                    
+                    # Log the filename as received from filesystem
+                    logging.info(f"Filesystem filename (raw): {repr(filename)}")
+                    
+                    # Skip hidden and temp files
+                    if filename.startswith('.') or filename.startswith('~$') or filename.endswith('~'):
+                        continue
+                    
+                    # Check extension
+                    ext = file_path.suffix.lower()
+                    if ext not in SUPPORTED_EXTENSIONS:
+                        logging.debug(f"Skipping unsupported format: {filename}")
+                        continue
+                    
+                    logging.info(f"Processing file: {filename}")
+                    
+                    try:
+                        # Read file content
+                        with open(file_path, 'rb') as f:
+                            file_content = f.read()
+                        
+                        # Create FileStorage object
+                        file_storage = FileStorage(
+                            stream=BytesIO(file_content),
+                            filename=filename,
+                            content_type='application/octet-stream'
+                        )
+                        file_storage.id = filename  # For deduplication
+                        
+                        # Use RAGFlow native upload_document method
+                        err, uploaded_files = file_service.upload_document(
+                            kb=kb,
+                            file_objs=[file_storage],
+                            user_id=current_user.id,
+                            src="local"
+                        )
+                        
+                        if err:
+                            failed_count += 1
+                            failed_files.append(f"Upload failed: {filename} - {err[0]}")
+                            logging.warning(f"Upload failed for {filename}: {err[0]}")
+                        else:
+                            added_count += 1
+                            doc_info = uploaded_files[0] if uploaded_files else None
+                            if doc_info:
+                                doc_dict, _ = doc_info
+                                logging.info(f"[Added] {filename} -> doc_id: {doc_dict.get('id', 'unknown')}")
+                                
+                                # Get storage address and queue parsing tasks
+                                try:
+                                    bucket, name = File2DocumentService.get_storage_address(doc_id=doc_dict['id'])
+                                    queue_tasks(doc_dict, bucket, name, 0)
+                                    logging.info(f"[Task queued] {filename} -> parsing started")
+                                except Exception as task_err:
+                                    logging.error(f"Failed to queue task for {filename}: {task_err}")
+                                    failed_count += 1
+                                    failed_files.append(f"Task queue failed: {filename} - {str(task_err)}")
+                            else:
+                                logging.warning(f"Upload succeeded but no file info returned for {filename}")
+                            
+                    except Exception as e:
+                        logging.error(f"Error processing {filename}: {e}", exc_info=True)
+                        failed_count += 1
+                        failed_files.append(f"{filename}: {str(e)}")
+            
+            # Build response
+            response = {
+                "status": "ok",
+                "upload_result": {
+                    "added": added_count,
+                    "updated": updated_count,
+                    "failed": failed_count
+                },
+                "summary": f"新增 {added_count} 文档 | 更新 {updated_count} 文档 | 失败 {failed_count} 文档"
+            }
+            
+            if failed_files:
+                response["status"] = "warning"
+                response["failed_files"] = failed_files
+                response["warning"] = f"有 {len(failed_files)} 个文件处理失败"
+                logging.warning(f"Upload completed with {len(failed_files)} failures: {failed_files}")
+            
+            return get_result(data=response)
+            
+    except zipfile.BadZipFile as e:
+        logging.error(f"Invalid ZIP file: {e}")
+        return get_error_data_result(message=f"Invalid ZIP file format: {str(e)}")
+    except Exception as e:
+        logging.error(f"Upload ZIP failed: {e}", exc_info=True)
         return server_error_response(e)
 
 

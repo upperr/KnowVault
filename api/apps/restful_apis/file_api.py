@@ -42,6 +42,75 @@ from common.misc_utils import thread_pool_exec
 from api.apps.services import file_api_service
 
 
+@manager.route("/files/upload", methods=["POST"])  # noqa: F821
+@login_required
+@add_tenant_id_to_kwargs
+async def upload_and_parse(tenant_id: str = None):
+    """
+    Upload and parse file content.
+    ---
+    tags:
+      - Files
+    security:
+      - ApiKeyAuth: []
+    parameters:
+      - in: header
+        name: Authorization
+        type: string
+        required: true
+        description: Bearer token for authentication.
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              file:
+                type: string
+                format: binary
+                description: File to upload and parse.
+    responses:
+      200:
+        description: Successful operation.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [success, error]
+                content:
+                  type: string
+                  description: Parsed file content.
+    """
+    content_type = request.content_type or ""
+    try:
+        if "multipart/form-data" not in content_type:
+            return get_error_argument_result("Content-Type must be multipart/form-data")
+        
+        form = await request.form
+        files = await request.files
+        if "file" not in files:
+            return get_error_argument_result("No file part!")
+        
+        file_obj = files.get("file")
+        if file_obj.filename == "":
+            return get_error_argument_result("No file selected!")
+        
+        success, result = await file_api_service.upload_and_parse_file(file_obj)
+        if success:
+            # 返回扁平结构，content 必须是字符串
+            content = result if isinstance(result, str) else str(result)
+            content = content if isinstance(content, str) else str(content)
+            return get_json_result(data={"status": "success", "content": content})
+        else:
+            return get_json_result(code=RetCode.DATA_ERROR, data={"status": "error", "message": result})
+    except Exception as e:
+        logging.exception(e)
+        return get_json_result(code=RetCode.DATA_ERROR, data={"status": "error", "message": str(e)})
+
+
 @manager.route("/files", methods=["POST"])  # noqa: F821
 @login_required
 @add_tenant_id_to_kwargs
