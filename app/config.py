@@ -37,7 +37,7 @@ OPENAI_BASE_URL = os.environ.get(
 # API Key - 本地模型通常不需要，但某些服务需要
 OPENAI_API_KEY = os.environ.get(
     "OPENAI_API_KEY",
-    "sk-no-key-required"  # 本地模型可随意填写
+    "your-api-key"  # 本地模型可随意填写
 )
 
 # 嵌入模型 (用于向量化文档)
@@ -51,7 +51,7 @@ LLM_MODEL = os.environ.get("LLM_MODEL", "qwen2.5:7b")
 # ============== MinerU API 配置 ==============
 # MinerU 文档解析服务地址
 MINERU_BASE_URL = os.environ.get("MINERU_BASE_URL", "http://localhost:8070")
-MINERU_TOKEN = os.environ.get("MINERU_TOKEN", "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJqdGkiOiI3MzUwMDU1OSIsInJvbCI6IlJPTEVfUkVHSVNURVIiLCJpc3MiOiJPcGVuWExhYiIsImlhdCI6MTc4MzQ5MzQ1NywiY2xpZW50SWQiOiJsa3pkeDU3bnZ5MjJqa3BxOXgydyIsInBob25lIjoiMTU1NTU0NDU3NzYiLCJvcGVuSWQiOm51bGwsInV1aWQiOiJmMGVlYTI0YS02YjRlLTQwNmMtYjBjNy1jZTJjM2NmMzRkZjgiLCJlbWFpbCI6IiIsImV4cCI6MTc5MTI2OTQ1N30.hQr-TdJvw33uxP0QbNl46d-Vx9MEe4gdt4U3IbaBaDTb6bgc-qnPqOCndAdqGeKedgePJF08Wr3kWowmd3DMjQ")
+MINERU_TOKEN = os.environ.get("MINERU_TOKEN", "your-mineru-token")
 MINERU_TIMEOUT = int(os.environ.get("MINERU_TIMEOUT", "300"))  # 解析超时时间（秒）
 
 # ============== OCR 和表格解析配置 ==============
